@@ -23,9 +23,9 @@
     "default_title" : "Click to disable onPoint"
   },
 
-  "background" : {
-    "scripts" : ["eventpage.js"],
-    "persistent" : false
+  "background": {
+    "scripts": ["eventPage.js"],
+    "persistent": false
   },
 
   "content_scripts": [{
