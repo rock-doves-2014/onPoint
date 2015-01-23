@@ -24,9 +24,19 @@ SessionController.prototype.echoListener = function(){
   //watch the page for highlighting w/ cursor TK
 }
 
-SessionController.prototype.spawnEchoForm = function(){
-    var btn = document.createElement("BUTTON");
-    var t = document.createTextNode("ECHOOOO");
-    btn.appendChild(t);
-    document.body.appendChild(btn);
+SessionController.prototype.spawnEchoForm = function(x,y){
+    console.log("x: " + x);
+    console.log("y: " + y);
+
+
+    this.selector = document.createElement("form");
+    this.selector.id = "echo-submit";
+
+    this.selector.style.left = x;
+    this.selector.style.top = y;
+
+    console.log(this.selector);
+    document.body.appendChild(this.selector);
+
+
 }
