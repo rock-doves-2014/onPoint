@@ -1,7 +1,8 @@
-function Echo(string, userText){
+function Echo(string, userText, url){
   this.quote = string;
   this.userText = userText || "";
-  this.sentTo = [];
+  this.sentTo = [];;
+  this.bitly = url;
   // this.bitly = SessionController.shortenUrl();
   this.wasSent = false;
 }
