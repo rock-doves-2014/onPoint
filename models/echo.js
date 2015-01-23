@@ -2,7 +2,7 @@ function Echo(string, userText){
   this.quote = string;
   this.userText = userText || "";
   this.sentTo = [];
-  this.bitly = SessionController.shortenUrl();
+  // this.bitly = SessionController.shortenUrl();
   this.wasSent = false;
 }
 
