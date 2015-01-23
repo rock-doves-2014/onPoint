@@ -25,5 +25,8 @@ SessionController.prototype.echoListener = function(){
 }
 
 SessionController.prototype.spawnEchoForm = function(){
-  // build the form anchored on the highlighting TK
+    var btn = document.createElement("BUTTON");
+    var t = document.createTextNode("ECHOOOO");
+    btn.appendChild(t);
+    document.body.appendChild(btn);
 }
