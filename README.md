@@ -3,6 +3,9 @@
 # onPoint
 A seamless sharing tool for Google Chrome. Just drag to highlight and click to post.
 
+#### by the Smooth Foundation crew:
+Mike Horn, Luke Kedziora, Jorge Rubio, and Luke Thomas
+
 Users preconfigure their settings. Does every selection they post have a shortened link attached? Do they post to twitter AND facebook, or just one?
 
 Users can also tweak settings and add text for each post via the onPoint tooltip.
