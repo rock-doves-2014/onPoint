@@ -6,11 +6,10 @@ form button {
 }
 
 #echo-submit {
-  height: 100px;
-  width: 100px;
-  background-color: red;
-/*  left: 1px;
-  top: 1px;*/
+  visibility: hidden;
   position: absolute;
-
+  height: 75px;
+  width: 150px;
+  background-color: #F0F8FF;
+  border: 1px dotted blue;
 }
