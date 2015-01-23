@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", function(event) {
 
+  // is this the appropriate place to call this?
   var session = new SessionController();
 
   document.onmouseup = function run(event) {
@@ -18,13 +19,10 @@ document.addEventListener("DOMContentLoaded", function(event) {
       // here for testing Echo object creation
       var url = document.URL;
 
-      console.log(selectedString);
-
       echoForm.addEventListener("submit", function(){
-        // create Echo in eventpage
-        // how do I create a connection?
         createEcho(selectedString, userText, url);
 
+        // what does this do? Ask Jorge.
         // chrome.runtime.sendMessage({message: selectedString}, function(response) {
         // });
       });
