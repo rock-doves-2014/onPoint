@@ -1,9 +1,21 @@
 input[type=text] {
 line-height: 1em;
-border: 1px solid gray;
 background-color: #ecf0f1;
 border-radius: 4px;
 font-size: 1.4em;
+position: relative;
+bottom:5px;
+}
+
+div.echo-frame {
+  background-color: rgba(220,220,220, 1);
+  border-radius: 50px;
+  width: 445px;
+  z-index: -2;
+}
+
+.echo-frame .btn {
+  z-index: 10;
 }
 
 #gray-yellow .btn {
@@ -11,36 +23,61 @@ font-size: 1.4em;
   -moz-border-radius: 28;
   border-radius: 11px;
   background: #626F70;
-  padding: 2px 2px 0px 0px;
-  border: 0;
-}
-
-#gray-yellow .btn:hover {
-  background: #626F70;
   background-image: -webkit-linear-gradient(top, #626F70, #3a4142);
   background-image: -moz-linear-gradient(top, #626F70, #3a4142);
   background-image: -ms-linear-gradient(top, #626F70, #3a4142);
   background-image: -o-linear-gradient(top, #626F70, #3a4142);
   background-image: linear-gradient(to bottom, #626F70, #3a4142);
+  padding: 2px 2px 0px 0px;
+  border: 0;
+}
+
+#gray-yellow .btn:hover {
+  background: #adb2b3;
+  background-image: -webkit-linear-gradient(top, #adb2b3, #626F70);
+  background-image: -moz-linear-gradient(top, #adb2b3, #626F70);
+  background-image: -ms-linear-gradient(top, #adb2b3, #626F70);
+  background-image: -o-linear-gradient(top, #adb2b3, #626F70);
+  background-image: linear-gradient(to bottom, #adb2b3, #626F70);
   text-decoration: none;
 }
 
+#frame-1 {
+width: 337px;
+border-radius: 13px;
+height: 43px;
+}
+
+#frame-1 input[type=text] {
+  position: relative;
+  bottom: 10px;
+  left: -1px;
+}
+
 #black-sage .btn {
-  -webkit-border-radius: 28;
-  -moz-border-radius: 28;
-  border-radius: 51px;
-  text-shadow: 0px 0px 0px #ffffff;
-  font-family: Arial;
-  color: #b6fcd5;
-  font-size: 18px;
-  background: #333333;
-  padding: 9px 11px 11px 70px;
-  text-decoration: none;
-  border: 0;
+border-radius: 51px;
+text-shadow: 0px 0px 0px #ffffff;
+font-family: Arial;
+color: #b6fcd5;
+font-size: 18px;
+background: #333333;
+padding: 12px 11px 11px 70px;
+text-decoration: none;
+border: 0;
+position: relative;
 }
 
 #black-sage .btn:hover {
   font-style: oblique;
+}
+
+#frame-2 input[type=text] {
+position: relative;
+bottom: -4px;
+left: -40px;
+border-radius: 50px;
+height: 33px;
+padding-left: 45px;
 }
 
 
@@ -57,7 +94,7 @@ font-size: 1.4em;
 font-family: Arial;
 color: black;
 font-size: 20px;
-padding: 10px 20px 9px 95px;
+padding: 10px 15px 9px 13px;
 text-decoration: none;
 }
 
@@ -87,9 +124,10 @@ text-decoration: none;
   color: #000000;
   font-size: 43px;
   padding: 6px 20px 6px 99px;
-  border: 2px solid white;
+  border: 2px solid black;
 }
 
 #peach-black .btn:hover {
-  border: 2px solid black;
+  border: 4px solid black;
+  padding: 4px 18px 4px 97px;
 }
