@@ -1,23 +1,17 @@
-document.addEventListener("DOMContentLoaded", function(event) {
-  console.log("1");
-
-  document.onmouseup = function run(event) {
+document.onmouseup = function run(event) {
   console.log("2");
 
-    if (window.getSelection() != "") {
-      console.log("3");
+  if (window.getSelection() != "") {
+    console.log("3");
 
-      xCoord = event.pageX;
-      yCoord = event.pageY;
+    xCoord = event.pageX;
+    yCoord = event.pageY;
 
-      spawnEchoForm(xCoord, yCoord);
-
-    };
-
+    spawnEchoForm(xCoord, yCoord);
 
   };
 
-});
+};
 
 function spawnEchoForm(x,y) {
   if (!this.echoForm) {
