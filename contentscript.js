@@ -38,7 +38,9 @@ function spawnEchoForm(x, y, that) {
     that.echoForm.style.zIndex = 5e6;
 
     // that.echoForm.background = url('sage_sound.png') center no-repeat #333333;
-    that.echoForm.style.background = "url('chrome-extension://chdnkahcjlbeideegkeccpcdccaadikn/sage_sound.png') center no-repeat #333333";
+
+    var imgURL = chrome.extension.getURL("sage_sound.png");
+    that.echoForm.style.background = imgURL;
 
     var body = document.getElementsByTagName("body")[0];
     body.appendChild(that.echoForm);
