@@ -1,19 +1,16 @@
-function Echo(string, userText, url){
-  this.quote = string;
+function Echo(highlightedString, userText, shortUrl){
+  this.quote = highlightedString;
   this.userText = userText || "";
   this.sentTo = [];
-  // abbreviated bitly for testing & prep
-  // remember to update line 1, need only 2 args!
-  this.bitly = url;
-  // this.bitly = SessionController.shortenUrl();
+  this.bitly = shortUrl;
   this.wasSent = false;
 }
 
 Echo.prototype.asText = function(){
-  if (this.userText == ""){
+  if(this.userText == ""){
     return this.quote +"| "+ this.bitly;
   } else {
     return '"'+this.quote + '"| ' + this.userText + this.bitly;
-  }
-}
+  };
+};
 
