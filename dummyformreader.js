@@ -7,19 +7,21 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
     if (window.getSelection() != "") {
 
-      var xCoord = event.pageX;
-      var yCoord = event.pageY;
+      xCoord = event.pageX;
+      yCoord = event.pageY;
+      // console.log("xCoord: " + xCoord);
+      // console.log("yCoord: " + yCoord);
 
-      var element = session.spawnEchoForm(xCoord, yCoord);
+      session.spawnEchoForm(xCoord, yCoord);
+      echoForm = document.getElementById("echo-submit");
 
-      var echoForm = document.getElementById("echo-submit");
       var selectedString = window.getSelection().toString();
-      var userText = document.getElementById("userText").value;
 
       // here for testing Echo object creation
       var url = document.URL;
 
       echoForm.addEventListener("submit", function(){
+        var userText = document.getElementById("userText").value;
         createEcho(selectedString, userText, url);
 
         // what does this do? Ask Jorge.
@@ -27,8 +29,38 @@ document.addEventListener("DOMContentLoaded", function(event) {
         // });
       });
 
-    }
-  };
+    } // end IF
+
+    var hideEchoForm = function(event) {
+      clickAwayX = event.pageX;
+      clickAwayY = event.pageY;
+      // console.log("clickAwayX: " + clickAwayX);
+      // console.log("clickAwayY: " + clickAwayY);
+
+      leftEchoFormX = xCoord - 1;
+      rightEchoFormX = xCoord + 150;
+      upEchoFormY = yCoord - 1;
+      downEchoFormY = yCoord + 75;
+
+
+      if ( echoForm ) {
+        if (  (clickAwayX > rightEchoFormX) || (clickAwayY > downEchoFormY)  ) {
+          $("#echo-submit").css("visibility", "hidden");
+          echoForm = null;
+          document.removeEventListener("click");
+        }
+
+        if (  (clickAwayX < leftEchoFormX) || (clickAwayY < upEchoFormY)  ) {
+          $("#echo-submit").css("visibility", "hidden");
+          echoForm = null;
+          document.removeEventListener("click");
+        }
+      }
+    };
+
+    document.addEventListener("click", hideEchoForm(event));
+
+  };  // end document mouse up
 
 
 
