@@ -9,19 +9,19 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
       xCoord = event.pageX;
       yCoord = event.pageY;
-      console.log("xCoord: " + xCoord);
-      console.log("yCoord: " + yCoord);
+      // console.log("xCoord: " + xCoord);
+      // console.log("yCoord: " + yCoord);
 
       session.spawnEchoForm(xCoord, yCoord);
       echoForm = document.getElementById("echo-submit");
 
       var selectedString = window.getSelection().toString();
-      var userText = document.getElementById("userText").value;
 
       // here for testing Echo object creation
       var url = document.URL;
 
       echoForm.addEventListener("submit", function(){
+        var userText = document.getElementById("userText").value;
         createEcho(selectedString, userText, url);
 
         // what does this do? Ask Jorge.
@@ -31,25 +31,34 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
     } // end IF
 
-    document.addEventListener("click", function(event){
+    var hideEchoForm = function(event) {
       clickAwayX = event.pageX;
       clickAwayY = event.pageY;
-      console.log("clickAwayX: " + clickAwayX);
-      console.log("clickAwayY: " + clickAwayY);
+      // console.log("clickAwayX: " + clickAwayX);
+      // console.log("clickAwayY: " + clickAwayY);
 
-      echoFormX = xCoord + 150;
-      echoFormY = yCoord + 75;
+      leftEchoFormX = xCoord - 1;
+      rightEchoFormX = xCoord + 150;
+      upEchoFormY = yCoord - 1;
+      downEchoFormY = yCoord + 75;
 
-      if (  echoForm ) {
-          if (  (clickAwayX > echoFormX) || (clickAwayY > echoFormY)  ) {
-                console.log("HIDE clickAwayX: " + rightEchoFormX);
-                console.log("HIDE clickAwayY: " + downEchoFormY);
 
-                $("#echo-submit").css("visibility", "hidden");
-                echoForm = null;
-          }
+      if ( echoForm ) {
+        if (  (clickAwayX > rightEchoFormX) || (clickAwayY > downEchoFormY)  ) {
+          $("#echo-submit").css("visibility", "hidden");
+          echoForm = null;
+          document.removeEventListener("click");
+        }
+
+        if (  (clickAwayX < leftEchoFormX) || (clickAwayY < upEchoFormY)  ) {
+          $("#echo-submit").css("visibility", "hidden");
+          echoForm = null;
+          document.removeEventListener("click");
+        }
       }
-    });
+    };
+
+    document.addEventListener("click", hideEchoForm(event));
 
   };  // end document mouse up
 
