@@ -9,11 +9,9 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
       xCoord = event.pageX;
       yCoord = event.pageY;
-      // console.log("xCoord: " + xCoord);
-      // console.log("yCoord: " + yCoord);
 
       session.spawnEchoForm(xCoord, yCoord);
-      echoForm = document.getElementById(".echo-frame");
+      echoForm = document.getElementById("#test");
 
       var selectedString = window.getSelection().toString();
 
@@ -29,13 +27,11 @@ document.addEventListener("DOMContentLoaded", function(event) {
         // });
       });
 
-    } // end IF
+    }
 
     var hideEchoForm = function(event) {
       clickAwayX = event.pageX;
       clickAwayY = event.pageY;
-      // console.log("clickAwayX: " + clickAwayX);
-      // console.log("clickAwayY: " + clickAwayY);
 
       leftEchoFormX = xCoord - 1;
       rightEchoFormX = xCoord + 150;
@@ -60,9 +56,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
     document.addEventListener("click", hideEchoForm(event));
 
-  };  // end document mouse up
-
-
+  };
 
 
 

@@ -9,9 +9,7 @@ div.echo-frame {
 
   background-color: rgba(220,220,220, 1);
   border-radius: 50px;
-
   z-index: -2;
-
 }
 
 div.echo-submit{
