@@ -1,17 +1,21 @@
 describe ("EchoFactory", function() {
-  var factory;
   var formSubmission = {};
+  var bogusUrl = "https://www.google.com";
 
   beforeEach(function() {
   formSubmission.selectedString = "Tom Brady deflates Footballs!";
   formSubmission.userText = "@NewEnglandPatriots #deflategate";
-  factory = new EchoFactory();
  });
 
  it("can produce a new Echo with the object it received from the page", function(){
-  var babyEcho = EchoFactory.createEcho(formSubmission);
+  var babyEcho = EchoFactory.createEcho(formSubmission, bogusUrl);
   expect(babyEcho.userText).toEqual("@NewEnglandPatriots #deflategate");
   expect(babyEcho.constructor).toEqual(Echo);
+ });
+
+ xit("can shorten a url when passed one", function(){
+  expect(EchoFactory.bitlyShorten(bogusUrl).length).toBeGreatThan(5);
+  expect(EchoFactory.bitlyShorten(bogusUrl).length).toBeLessThan(30);
  });
 
 });
