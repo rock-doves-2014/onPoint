@@ -4,3 +4,12 @@ form button {
   width: 62px;
   border-radius: 10px;
 }
+
+#echo-submit {
+  visibility: hidden;
+  position: absolute;
+  height: 75px;
+  width: 150px;
+  background-color: #F0F8FF;
+  border: 1px dotted blue;
+}
