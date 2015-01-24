@@ -1,8 +1,8 @@
 function save_options() {
-  var tw = document.getElementById("twitterOn").checked;
-  var fb = document.getElementById("facebookOn").checked;
-  var fbFloor = document.getElementById("facebookCharFloor").checked;
-  var url = document.getElementById("alwaysAddUrl").checked;
+  var twitterSwitch = document.getElementById("twitterOn").checked;
+  var faceBookSwitch = document.getElementById("facebookOn").checked;
+  var fbFloorSwitch = document.getElementById("facebookCharFloor").checked;
+  var alwaysUrlSwitch = document.getElementById("alwaysAddUrl").checked;
 
   chrome.storage.sync.set({
     twitterOn: tw,
