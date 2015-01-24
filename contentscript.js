@@ -1,5 +1,5 @@
 document.onmouseup = function run(event) {
-  console.log("2");
+  event.stopPropagation();
 
   if (window.getSelection() != "") {
     console.log("3");
@@ -7,25 +7,45 @@ document.onmouseup = function run(event) {
     xCoord = event.pageX;
     yCoord = event.pageY;
 
-    spawnEchoForm(xCoord, yCoord);
+    console.log(xCoord);
+
+    var that = this;
+    spawnEchoForm(xCoord, yCoord, that);
+    console.log(this);
 
   };
 
 };
 
-function spawnEchoForm(x,y) {
-  if (!this.echoForm) {
+function spawnEchoForm(x, y, that) {
+
+
+  if (!that.echoForm) {
     console.log("4");
 
-    this.echoForm = document.createElement("div");
-    this.echoForm.setAttribute("class", "echo-frame");
-    this.echoForm.style.position = "absolute";
-    this.echoForm.style.visibility = "visible";
-    this.echoForm.style.left = x;
-    this.echoForm.style.top = y;
-    this.echoForm.style.backgroundColor = "red";
-    this.echoForm.style.height = "100";
-  }
+    that.echoForm = document.createElement("div");
+    console.log(that.echoForm);
+    console.log(that);
+
+    that.echoForm.setAttribute("class", "echo-frame");
+    that.echoForm.style.position = "absolute";
+    that.echoForm.style.visibility = "visible";
+    that.echoForm.style.left = x + "px";
+    that.echoForm.style.top = y + "px";
+    // that.echoForm.style.backgroundColor = "red";
+    // that.echoForm.style.height = "100px";
+    // that.echoForm.style.width = "100px";
+    that.echoForm.style.zIndex = 5e6;
+
+    // that.echoForm.background = url('sage_sound.png') center no-repeat #333333;
+    that.echoForm.style.background = "url('chrome-extension://chdnkahcjlbeideegkeccpcdccaadikn/sage_sound.png') center no-repeat #333333";
+
+    var body = document.getElementsByTagName("body")[0];
+    body.appendChild(that.echoForm);
+
+
+
+  };
 
 
 
