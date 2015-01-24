@@ -1,13 +1,44 @@
-<h2> onPoint Configuration </h2>
-
-<!-- may be able to delete name and value depending on how we decide to configure JS object along with google PUT route -->
-<input type="checkbox" id="twitterOn"> Echo Twitter <br>
-<input type="checkbox" id="facebookOn" value="facebookOn"> Echo Facebook <br>
-<input type="checkbox" id="facebookCharFloor" value="facebookCharFloor"> Echo +140 char Facebook <br>
-<input type="checkbox" id="alwaysAddUrl" value="alwaysAddUrl"> Echo URL <br><br>
-
-<button id="save">Save</button><br><br>
-<div id="status"></div>
-
+<h2>onPoint</h2>
+<link rel="stylesheet" type="text/css" href="options.css">
 <script src="options.js"></script>
+
+<div>
+  <div>
+    <h2>Manage Your Preferences</h2>
+    <h3>Facebook</h3>
+    <div class="onoffswitch">
+        <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" checked>
+        <label class="onoffswitch-label" for="myonoffswitch">
+            <span class="onoffswitch-inner"></span>
+            <span class="onoffswitch-switch"></span>
+        </label>
+    </div>
+    <h3>Twitter</h3>
+    <div class="onoffswitch-2">
+        <input type="checkbox" name="onoffswitch-2" class="onoffswitch-checkbox-2" id="myonoffswitch-2" checked>
+        <label class="onoffswitch-label-2" for="myonoffswitch-2">
+            <span class="onoffswitch-inner-2"></span>
+            <span class="onoffswitch-switch-2"></span>
+        </label>
+
+    </div>
+  </div>
+  <div>
+    <div><br>
+      <a href="#">Connect to Twitter</a><br><br>
+      <a href="#">Connect to Facebook</a><br><br>
+      </div>
+    </div>
+<!--
+create an options.css file
+this page is the options tab that will open a new tab:
+---manifest file to
+contains all of the forms we need the user to submit to authorize our posting to all social media:
+-Twitter
+-Facebook
+-check boxes, toggles - ios style switch, on/off button, simple/clean design
+------echo to twitter: yes/no
+------echo to fb: yes/no
+-look into sass -->
+
 
