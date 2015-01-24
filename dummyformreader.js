@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
       // console.log("yCoord: " + yCoord);
 
       session.spawnEchoForm(xCoord, yCoord);
-      echoForm = document.getElementById("echo-submit");
+      echoForm = document.getElementById(".echo-frame");
 
       var selectedString = window.getSelection().toString();
 
@@ -45,13 +45,13 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
       if ( echoForm ) {
         if (  (clickAwayX > rightEchoFormX) || (clickAwayY > downEchoFormY)  ) {
-          $("#echo-submit").css("visibility", "hidden");
+          $(".echo-frame").css("visibility", "hidden");
           echoForm = null;
           document.removeEventListener("click");
         }
 
         if (  (clickAwayX < leftEchoFormX) || (clickAwayY < upEchoFormY)  ) {
-          $("#echo-submit").css("visibility", "hidden");
+          $(".echo-frame").css("visibility", "hidden");
           echoForm = null;
           document.removeEventListener("click");
         }

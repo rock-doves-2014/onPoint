@@ -25,7 +25,7 @@ SessionController.prototype.echoListener = function(){
 }
 
 SessionController.prototype.spawnEchoForm = function(x,y){
-    $("#echo-submit").css("visibility", "visible");
-    $("#echo-submit").css("left", x);
-    $("#echo-submit").css("top", y);
+    $(".echo-frame").css("visibility", "visible");
+    $(".echo-frame").css("left", x);
+    $(".echo-frame").css("top", y);
 }

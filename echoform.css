@@ -1,27 +1,17 @@
-form button {
-  background-color: rgba(149, 165, 166, 1.0);
-  height: 40px;
-  width: 62px;
-  border-radius: 10px;
-}
-
-#echo-submit {
+div.echo-frame {
   visibility: hidden;
   position: absolute;
-  height: 75px;
-  width: 150px;
-  background-color: #F0F8FF;
-  border: 1px dotted blue;
-}
+  /*height: 75px;*/
+  /*width: 150px;*/
 
-/*new styling*/
+  width: 495px;
+  height: 84px;
 
-div.echo-frame {
   background-color: rgba(220,220,220, 1);
   border-radius: 50px;
-  width: 495px;
+
   z-index: -2;
-  height: 84px;
+
 }
 
 div.echo-submit{
