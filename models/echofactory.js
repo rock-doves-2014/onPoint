@@ -18,7 +18,7 @@ var EchoFactory = {
   sanitizeUrl: function(url){
     if(url.match(/\?/) && !(url.match(/\/\?/))){
       return url.replace(/\?/, "/?");
-    } else { return url}
+    } else { return url};
   },
 
 };
