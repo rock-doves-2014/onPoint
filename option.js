@@ -22,11 +22,10 @@ function save_options() {
 
 function restore_options() {
   chrome.storage.sync.get({
-    twitterOn: true,
-    facebookOn: true,
-    facebookCharFloor: true,
-    alwaysAddUrl: true,
+    //send key value pairs of user's changed options to update. Make async.
   }, function(items) {
+    //Luke Kedz wrote this callback. It should act like a switch..case for checked
+    //boxes.
     document.getElementById("twitterOn").checked = items.twitterOn;
     document.getElementById("facebookOn").checked = items.facebookOn;
     document.getElementById("facebookCharFloor").checked = items.facebookCharFloor;
