@@ -4,16 +4,18 @@ function SessionController(pointUser){
 }
 
 SessionController.prototype.shortenUrl = function(){
+  //IF getUrl() returns a string and not false...
+  //TK get the url from google chrome, query bitly, and send the shortened link;
+};
+
+SessionController.prototype.getUrl = function(){
   if (this.user.alwaysAddUrl){
     var tabUrl = chrome.tabs.query({
       active: true, currentWindow: true}, function(tabs){
       var tab = tabs[0];
-      var url = tab.url;
-    })
-
-    console.log(url + "*****minify me!");
-    return "bitlyurl"; //TK; use above url
-  } else {return ""};
+      return tab.url;
+    });
+  } else {return false};
 }
 
 SessionController.prototype.pause = function(){
@@ -27,3 +29,5 @@ SessionController.prototype.echoListener = function(){
 SessionController.prototype.spawnEchoForm = function(){
   // build the form anchored on the highlighting TK
 }
+
+
