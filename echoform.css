@@ -61,3 +61,7 @@ div.echo-submit{
 .echo-frame button input[type=text]:focus {
   outline: 0;
 }
+
+.echo-submit input[type=text]:focus {
+  outline: 0;
+}
