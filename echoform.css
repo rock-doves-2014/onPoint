@@ -13,3 +13,51 @@ form button {
   background-color: #F0F8FF;
   border: 1px dotted blue;
 }
+
+/*new styling*/
+
+div.echo-frame {
+  background-color: rgba(220,220,220, 1);
+  border-radius: 50px;
+  width: 495px;
+  z-index: -2;
+  height: 84px;
+}
+
+div.echo-submit{
+  position: relative;
+  top: 0;
+}
+
+.echo-frame button {
+  z-index: 10;
+  border-radius: 54px;
+  padding: 53px 47px 27px 33px;
+  background: url('sage_sound.png') center no-repeat #333333;
+  border: 2px solid #333333;
+  position: relative;
+}
+
+
+.echo-frame button:hover {
+  border-radius: 54px;
+  padding: 53px 47px 27px 33px;
+  background: url('black_sound.png') center no-repeat #B6FCD5;
+}
+
+.echo-frame input[type=text] {
+  background-color: #ecf0f1;
+  position: relative;
+  bottom: 2px;
+  left: -42px;
+  border-radius: 50px;
+  height: 33px;
+  padding: 9px 10px 7px 50px;
+  font-size: 1.3em;
+  width: 51%;
+  border: 1px solid #333333;
+}
+
+.echo-frame button input[type=text]:focus {
+  outline: 0;
+}
