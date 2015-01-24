@@ -1,16 +1,16 @@
-document.addEventListener("DOMContentLoaded", function(event) {
+// document.addEventListener("DOMContentLoaded", function(event) {
 
   // is this the appropriate place to call this?
   var session = new SessionController();
 
-  document.onmouseup = function run(event) {
+  // document.onmouseup = function run(event) {
 
-    if (window.getSelection() != "") {
+    // if (window.getSelection() != "") {
 
-      xCoord = event.pageX;
-      yCoord = event.pageY;
+      // xCoord = event.pageX;
+      // yCoord = event.pageY;
 
-      session.spawnEchoForm(xCoord, yCoord);
+      // session.spawnEchoForm(xCoord, yCoord);
       echoForm = document.getElementById("#test");
 
       var selectedString = window.getSelection().toString();
@@ -56,11 +56,11 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
     document.addEventListener("click", hideEchoForm(event));
 
-  };
+  // };
 
 
 
-});
+// });
 
 
 
