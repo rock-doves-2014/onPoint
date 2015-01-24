@@ -7,12 +7,14 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
     if (window.getSelection() != "") {
 
-      var xCoord = event.pageX;
-      var yCoord = event.pageY;
+      xCoord = event.pageX;
+      yCoord = event.pageY;
+      console.log("xCoord: " + xCoord);
+      console.log("yCoord: " + yCoord);
 
-      var element = session.spawnEchoForm(xCoord, yCoord);
+      session.spawnEchoForm(xCoord, yCoord);
+      echoForm = document.getElementById("echo-submit");
 
-      var echoForm = document.getElementById("echo-submit");
       var selectedString = window.getSelection().toString();
       var userText = document.getElementById("userText").value;
 
@@ -27,8 +29,29 @@ document.addEventListener("DOMContentLoaded", function(event) {
         // });
       });
 
-    }
-  };
+    } // end IF
+
+    document.addEventListener("click", function(event){
+      clickAwayX = event.pageX;
+      clickAwayY = event.pageY;
+      console.log("clickAwayX: " + clickAwayX);
+      console.log("clickAwayY: " + clickAwayY);
+
+      echoFormX = xCoord + 150;
+      echoFormY = yCoord + 75;
+
+      if (  echoForm ) {
+          if (  (clickAwayX > echoFormX) || (clickAwayY > echoFormY)  ) {
+                console.log("HIDE clickAwayX: " + rightEchoFormX);
+                console.log("HIDE clickAwayY: " + downEchoFormY);
+
+                $("#echo-submit").css("visibility", "hidden");
+                echoForm = null;
+          }
+      }
+    });
+
+  };  // end document mouse up
 
 
 
