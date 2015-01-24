@@ -1,34 +1,55 @@
 describe ("SessionController", function() {
 
   var session;
-  var pointUser;
-
+  var mike;
+  var googleAcctObj;
 
   beforeEach(function() {
-    pointUser = {"name": "Mike Horn", "age": "29", "twitterOn": true};
-    session = jasmine.createSpyObj('session', ['enabled', 'user']);
+    googleAcctObj = {"name": "Mike Horn", "email": "mhorn918@gmail.com"};
+    mike = new PointUser(googleAcctObj);
+    session = new SessionController(mike);
 
-    session.enabled();
-    session.user(pointUser);
+    // session.enabled();
+    //session.user(mike);
   });
 
-  it("creates spies for each requested function", function() {
-    expect(session.enabled).toBeDefined();
+  it("has a user", function() {
     expect(session.user).toBeDefined();
   });
 
-  it("tracks that the spies were called", function() {
-    expect(session.enabled).toHaveBeenCalled();
-    expect(session.user).toHaveBeenCalled();
+   it("can return its user", function() {
+    expect(session.user).toEqual(mike);
   });
 
-  it("pointUser object contains the proper values", function() {
-    expect(pointUser).toEqual(jasmine.objectContaining({name: "Mike Horn"}));
-    expect(pointUser).toEqual(jasmine.objectContaining({age: "29"}));
-    expect(pointUser).toEqual(jasmine.objectContaining({twitterOn: true}));
+  it("it can read the properties from the user that were instantiated at user object creation", function() {
+    expect(session.user.googleAcctObj).toEqual(googleAcctObj);
+    expect(session.user.userId).toEqual(0);
+    expect(session.user.drafts.constructor).toEqual(Array);
+    expect(session.user.pointHistory.constructor).toEqual(Object);
+  });
+
+  it("mike object contains the proper values", function() {
+    expect(mike.googleAcctObj).toEqual(jasmine.objectContaining({name: "Mike Horn"}));
+    expect(mike.googleAcctObj).toEqual(jasmine.objectContaining({email: "mhorn918@gmail.com"}));
   });
 
   it("session.enabled evaluates to true", function() {
     expect(session.enabled).toBeTruthy();
   });
+
+  xit("session can return the user's email", function() {
+    expect(session.userEmail()).toEqual("mhorn918@gmail.com");
+  });
+
+  xit("can shorten a url", function(){
+    var bitly = session.shortenUrl();
+    expect(session.bitly).toBeTruthy;
+    expect(session.bity.length).toBeGreaterThan(4);
+  });
+
+  xit("returns false if the user doesn't want to append links", function(){
+    mike.turnOffUrlShare();
+    expect(session.shortenUrl()).toBeFalsy;
+  })
+
 });
