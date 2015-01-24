@@ -15,4 +15,10 @@ var EchoFactory = {
     //bitly logic
   }
 
+  sanitizeUrl: function(url){
+    if(url.match(/\?/) && !(url.match(/\/\?/))){
+      return url.replace(/\?/, "/?");
+    } else { return url}
+  },
+
 };

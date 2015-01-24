@@ -13,6 +13,12 @@ describe ("EchoFactory", function() {
   expect(babyEcho.constructor).toEqual(Echo);
  });
 
+ it("can sanitize a url that has improperly formatted params", function(){
+  var goodUrl = "http://example.com?query=parameter";
+  var badUrl = "http://example.com/?query=parameter";
+  expect( EchoFactory.sanitizeUrl(badUrl) ).toEqual(goodUrl);
+ });
+
  xit("can shorten a url when passed one", function(){
   expect(EchoFactory.bitlyShorten(bogusUrl).length).toBeGreatThan(5);
   expect(EchoFactory.bitlyShorten(bogusUrl).length).toBeLessThan(30);
