@@ -14,8 +14,8 @@ describe ("EchoFactory", function() {
  });
 
  it("can sanitize a url that has improperly formatted params", function(){
-  var goodUrl = "http://example.com?query=parameter";
-  var badUrl = "http://example.com/?query=parameter";
+  var badUrl = "http://example.com?query=parameter";
+  var goodUrl = "http://example.com/?query=parameter";
   expect( EchoFactory.sanitizeUrl(badUrl) ).toEqual(goodUrl);
  });
 
