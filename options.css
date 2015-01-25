@@ -22,7 +22,7 @@
 .onoffswitch-inner:before {
     content: "ON";
     padding-left: 10px;
-    background-color: #F0AD65; color: #FFFFFF;
+    background-color: #333333; color: #ecf0f1;
 }
 .onoffswitch-inner:after {
     content: "OFF";
@@ -32,7 +32,7 @@
 }
 .onoffswitch-switch {
     display: block; width: 11px; margin: 5px;
-    background: #FFFFFF;
+    background: #B6FCD5;
     border: 2px solid #999999; border-radius: 25px;
     position: absolute; top: 0; bottom: 0; right: 33px;
     -moz-transition: all 0.3s ease-in 0s; -webkit-transition: all 0.3s ease-in 0s;
@@ -70,7 +70,7 @@
 .onoffswitch-inner-2:before {
     content: "ON";
     padding-left: 10px;
-    background-color: #F0AD65; color: #FFFFFF;
+    background-color: #333333; color: #ecf0f1;
 }
 .onoffswitch-inner-2:after {
     content: "OFF";
@@ -80,7 +80,7 @@
 }
 .onoffswitch-switch-2 {
     display: block; width: 11px; margin: 5px;
-    background: #FFFFFF;
+    background: #B6FCD5;
     border: 2px solid #999999; border-radius: 25px;
     position: absolute; top: 0; bottom: 0; right: 33px;
     -moz-transition: all 0.3s ease-in 0s; -webkit-transition: all 0.3s ease-in 0s;
