@@ -14,7 +14,6 @@ document.onmouseup = function run(event) {
     test.addEventListener("submit", function(event){
       event.preventDefault();
       var userText = document.getElementById("userText").value;
-      console.log(selectedString + " " + userText);
 
       var thing = document.getElementsByClassName("echo-frame")[0];
       body.removeChild(thing);
@@ -69,20 +68,25 @@ function spawnEchoForm(x, y, that) {
     return true;
 }
 
+function checkClickEventWithinForm(event, parent) {
+  var current = event.target;
+
+  while (current) {
+    if (current === parent) return true;
+    current = current.parentNode;
+  }
+  return false;
+}
+
 function hideSpawnedEcho(event) {
-  clickAwayX = event.pageX;
-  clickAwayY = event.pageY;
+  var echoFrame = document.getElementsByClassName("echo-frame")[0];
 
-  leftEchoFormX = xCoord - 1;
-  rightEchoFormX = xCoord + 150;
-  upEchoFormY = yCoord - 1;
-  downEchoFormY = yCoord + 75;
-
-  if ( spawnedEcho ) {
-    if (  (clickAwayX > rightEchoFormX) || (clickAwayY > downEchoFormY) || (clickAwayX < leftEchoFormX) || (clickAwayY < upEchoFormY) ) {
-      var thing = document.getElementsByClassName("echo-frame")[0];
-      body.removeChild(thing);
+  if (spawnedEcho) {
+    if (!checkClickEventWithinForm(event, echoFrame)) {
+      body.removeChild(echoFrame);
       spawnedEcho = null;
     }
   }
 };
+
+
