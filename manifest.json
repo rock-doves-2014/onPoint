@@ -29,7 +29,7 @@
     "persistent" : false
   },
 
-  "web_accessible_resources" : ["chrome-extension://chdnkahcjlbeideegkeccpcdccaadikn/sage_sound.png"],
+  "web_accessible_resources" : ["sage_sound.png", "black_sound.png"],
 
   "content_scripts": [{
     "matches" : ["<all_urls>"],
