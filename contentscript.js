@@ -14,6 +14,11 @@ document.onmouseup = function run(event) {
     test.addEventListener("submit", function(event){
       event.preventDefault();
       var userText = document.getElementById("userText").value;
+      console.log(selectedString + " " + userText);
+
+      var thing = document.getElementsByClassName("echo-frame")[0];
+      body.removeChild(thing);
+      spawnedEcho = null;
 
       chrome.runtime.sendMessage({message: selectedString + " " + userText}, function(response) {
       });
