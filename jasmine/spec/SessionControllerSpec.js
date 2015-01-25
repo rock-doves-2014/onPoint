@@ -9,8 +9,13 @@ describe ("SessionController", function() {
     mike = new PointUser(googleAcctObj);
     session = new SessionController(mike);
 
-    // session.enabled();
-    //session.user(mike);
+    var jsonFromDom = {
+      "selectedString" : "Tom Brady deflates Footballs!",
+      "userText" : "@NewEnglandPatriots #deflategate",
+      "isDraft" : false
+    };
+
+    var anotherUrl = "https://nytimes.com";
   });
 
   it("has a user", function() {
@@ -50,6 +55,10 @@ describe ("SessionController", function() {
   xit("returns false if the user doesn't want to append links", function(){
     mike.turnOffUrlShare();
     expect(session.shortenUrl()).toBeFalsy;
-  })
+  });
+
+  xit("can read whether the Echo is slated for drafts or outbound", function(){
+    var newEcho = EchoFactory.createEcho(jsonFromDom);
+  });
 
 });

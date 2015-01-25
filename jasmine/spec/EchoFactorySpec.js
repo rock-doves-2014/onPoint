@@ -8,14 +8,19 @@ describe ("EchoFactory", function() {
  });
 
  it("can produce a new Echo with the object it received from the page", function(){
-  var babyEcho = EchoFactory.createEcho(formSubmission, bogusUrl);
+  var babyEcho = EchoFactory.createEcho(formSubmission);
   expect(babyEcho.userText).toEqual("@NewEnglandPatriots #deflategate");
   expect(babyEcho.constructor).toEqual(Echo);
  });
 
  xit("can shorten a url when passed one", function(){
-  expect(EchoFactory.bitlyShorten(bogusUrl).length).toBeGreatThan(5);
+  expect(EchoFactory.bitlyShorten(bogusUrl).length).toBeGreaterThan(5);
   expect(EchoFactory.bitlyShorten(bogusUrl).length).toBeLessThan(30);
+ });
+
+ it("can read the current tab url to use in Echo construction", function(){
+  expect(EchoFactory.getCurrentUrl().constructor).toEqual(String);
+  expect(EchoFactory.getCurrentUrl().length).toBeGreaterThan(5);
  });
 
 });

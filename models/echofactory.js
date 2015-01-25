@@ -1,7 +1,7 @@
 var EchoFactory = {
 
-  createEcho: function(submissionObj, url) {
-    this.url = url;
+  createEcho: function(submissionObj) {
+    this.url = getCurrentUrl();
     this.userText = submissionObj.userText || "";
     this.selectedString = submissionObj.selectedString;
     this.isDraft = submissionObj.isDraft || false;
@@ -14,6 +14,12 @@ var EchoFactory = {
   bitlyShorten: function(url){
     var longUrl = url || this.url;
     //bitly logic
+  },
+
+  getCurrentUrl: function(){
+    chrome.tabs.query({active: true, currentWindow: true}, function(arrayOfTabs){
+      return arrayOfTabs[0].id;
+    });
   }
 
 };
