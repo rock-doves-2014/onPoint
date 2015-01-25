@@ -24,8 +24,4 @@ SessionController.prototype.echoListener = function(){
   //watch the page for highlighting w/ cursor TK
 }
 
-// SessionController.prototype.spawnEchoForm = function(x,y){
-//     $(".echo-frame").css("visibility", "visible");
-//     $(".echo-frame").css("left", x);
-//     $(".echo-frame").css("top", y);
-// }
+
