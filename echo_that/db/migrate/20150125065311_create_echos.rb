@@ -1,4 +1,4 @@
-class CreateEchos < ActiveRecord::Migration
+class CreateEchoes < ActiveRecord::Migration
   def change
     create_table :echos do |t|
       t.references :user
@@ -7,7 +7,9 @@ class CreateEchos < ActiveRecord::Migration
       t.text :selected_string
       t.string :long_url
       t.string :short_url
-      t.boolean :is_draft
+      t.boolean :is_draft, null: false, default: false
+
+      t.timestamps
     end
   end
 end
