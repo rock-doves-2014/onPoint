@@ -7,6 +7,7 @@ class CreateEchos < ActiveRecord::Migration
       t.text :selected_string
       t.string :long_url
       t.string :short_url
+      t.boolean :is_draft
     end
   end
 end
