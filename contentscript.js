@@ -2,27 +2,18 @@ document.onmouseup = function run(event) {
   event.stopPropagation();
 
   if (window.getSelection() != "") {
-    console.log("3");
-
     xCoord = event.pageX;
     yCoord = event.pageY;
 
-    console.log(xCoord);
-
     var that = this;
     spawnEchoForm(xCoord, yCoord, that);
-    console.log(this);
-
   };
 
 };
 
 function spawnEchoForm(x, y, that) {
 
-
   if (!that.echoForm) {
-    console.log("4");
-
     that.echoForm = document.createElement("div");
     that.imageForm = document.createElement("img");
     that.imageForm.setAttribute("src", chrome.extension.getURL("sage_sound.png"));
