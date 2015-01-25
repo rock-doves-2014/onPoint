@@ -4,6 +4,7 @@ var EchoFactory = {
     this.url = url;
     this.userText = submissionObj.userText || "";
     this.selectedString = submissionObj.selectedString;
+    this.isDraft = submissionObj.isDraft || false;
 
     this.shortUrl = this.bitlyShorten(this.url);
 
