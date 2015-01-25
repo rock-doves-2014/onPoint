@@ -15,7 +15,7 @@ document.onmouseup = function run(event) {
       var userText = document.getElementById("userText").value;
       var selectedString = window.getSelection().toString();
 
-      closeEchoFormAfterSubmit()
+      closeEchoFormAfterSubmit();
 
       chrome.runtime.sendMessage({message: selectedString + " " + userText}, function(response) {
       });
@@ -32,7 +32,7 @@ function closeEchoFormAfterSubmit() {
   var echoFrame = document.getElementsByClassName("echo-frame")[0];
   body.removeChild(echoFrame);
   spawnedEcho = null;
-}
+};
 
 function spawnEchoForm(x, y, that) {
 
@@ -70,7 +70,7 @@ function spawnEchoForm(x, y, that) {
     body = document.getElementsByTagName("body")[0];
     body.appendChild(that.echoForm);
     return true;
-}
+};
 
 function hideSpawnedEcho(event) {
   var echoFrame = document.getElementsByClassName("echo-frame")[0];
@@ -91,4 +91,4 @@ function checkClickEventWithinForm(event, parent) {
     current = current.parentNode;
   }
   return false;
-}
+};
