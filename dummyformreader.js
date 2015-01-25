@@ -1,7 +1,4 @@
-// document.addEventListener("DOMContentLoaded", function(event) {
-
-  // is this the appropriate place to call this?
-  var session = new SessionController();
+  // var session = new SessionController();
 
   // document.onmouseup = function run(event) {
 
@@ -11,56 +8,24 @@
       // yCoord = event.pageY;
 
       // session.spawnEchoForm(xCoord, yCoord);
-      echoForm = document.getElementById("#test");
-
-      var selectedString = window.getSelection().toString();
-
-      // here for testing Echo object creation
-      var url = document.URL;
-
-      echoForm.addEventListener("submit", function(){
-        var userText = document.getElementById("userText").value;
-        createEcho(selectedString, userText, url);
-
-        // what does this do? Ask Jorge.
-        // chrome.runtime.sendMessage({message: selectedString}, function(response) {
-        // });
-      });
-
-    }
-
-    var hideEchoForm = function(event) {
-      clickAwayX = event.pageX;
-      clickAwayY = event.pageY;
-
-      leftEchoFormX = xCoord - 1;
-      rightEchoFormX = xCoord + 150;
-      upEchoFormY = yCoord - 1;
-      downEchoFormY = yCoord + 75;
-
-
-      if ( echoForm ) {
-        if (  (clickAwayX > rightEchoFormX) || (clickAwayY > downEchoFormY)  ) {
-          $(".echo-frame").css("visibility", "hidden");
-          echoForm = null;
-          document.removeEventListener("click");
-        }
-
-        if (  (clickAwayX < leftEchoFormX) || (clickAwayY < upEchoFormY)  ) {
-          $(".echo-frame").css("visibility", "hidden");
-          echoForm = null;
-          document.removeEventListener("click");
-        }
-      }
-    };
-
-    document.addEventListener("click", hideEchoForm(event));
-
-  // };
+      // echoForm = document.getElementById("#test");
 
 
 
-// });
+
+
+    //   echoForm.addEventListener("submit", function(){
+    //     var userText = document.getElementById("userText").value;
+    //     createEcho(selectedString, userText, url);
+
+    //     // what does this do? Ask Jorge.
+    //     chrome.runtime.sendMessage({message: selectedString}, function(response) {
+    //     });
+    //   });
+
+    // }
+
+
 
 
 

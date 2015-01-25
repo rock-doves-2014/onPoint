@@ -6,14 +6,28 @@ document.onmouseup = function run(event) {
     yCoord = event.pageY;
 
     var that = this;
-    spawnEchoForm(xCoord, yCoord, that);
-  };
+    spawnedEcho = spawnEchoForm(xCoord, yCoord, that);
+    var test = document.getElementById("test");
 
+    var selectedString = window.getSelection().toString();
+
+    test.addEventListener("submit", function(event){
+      event.preventDefault();
+      var userText = document.getElementById("userText").value;
+
+      chrome.runtime.sendMessage({message: selectedString + " " + userText}, function(response) {
+      });
+    });
+
+    document.onmousedown = function remove(event) {
+      hideSpawnedEcho(event);
+    };
+
+  };
 };
 
 function spawnEchoForm(x, y, that) {
 
-  if (!that.echoForm) {
     that.echoForm = document.createElement("div");
     that.echoForm.setAttribute("class", "echo-frame");
 
@@ -41,22 +55,29 @@ function spawnEchoForm(x, y, that) {
     that.fileRef.setAttribute("href", chrome.extension.getURL("echoform.css"));
     document.getElementsByTagName("head")[0].appendChild(that.fileRef);
 
-    var body = document.getElementsByTagName("body")[0];
-    body.appendChild(that.echoForm);
-
-
-
-
-
-
-
-
-
     that.echoForm.style.visibility = "visible";
     that.echoForm.style.left = x + "px";
     that.echoForm.style.top = y + "px";
-    // that.echoForm.style.width = "495px";
-    // that.echoForm.style.height = "85px";
-    // that.echoForm.style.zIndex = 1;
-  };
+
+    body = document.getElementsByTagName("body")[0];
+    body.appendChild(that.echoForm);
+    return true;
 }
+
+function hideSpawnedEcho(event) {
+  clickAwayX = event.pageX;
+  clickAwayY = event.pageY;
+
+  leftEchoFormX = xCoord - 1;
+  rightEchoFormX = xCoord + 150;
+  upEchoFormY = yCoord - 1;
+  downEchoFormY = yCoord + 75;
+
+  if ( spawnedEcho ) {
+    if (  (clickAwayX > rightEchoFormX) || (clickAwayY > downEchoFormY) || (clickAwayX < leftEchoFormX) || (clickAwayY < upEchoFormY) ) {
+      var thing = document.getElementsByClassName("echo-frame")[0];
+      body.removeChild(thing);
+      spawnedEcho = null;
+    }
+  }
+};
