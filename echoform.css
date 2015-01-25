@@ -8,6 +8,8 @@
     vertical-align: baseline;
     font-family: "Helvetica", Helvetica, sans-serif;
     display: inline;
+    min-height: 0;
+    min-width: 0;
   }
 /*end reset, begin specific style*/
 
