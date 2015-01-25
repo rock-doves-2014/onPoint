@@ -7,16 +7,16 @@ document.onmouseup = function run(event) {
 
     var that = this;
     spawnedEcho = spawnEchoForm(xCoord, yCoord, that);
-    var test = document.getElementById("test");
 
     var selectedString = window.getSelection().toString();
 
-    test.addEventListener("submit", function(event){
+    var inputForm = document.getElementById("input-form");
+    inputForm.addEventListener("submit", function(event){
       event.preventDefault();
       var userText = document.getElementById("userText").value;
 
-      var thing = document.getElementsByClassName("echo-frame")[0];
-      body.removeChild(thing);
+      var echoFrame = document.getElementsByClassName("echo-frame")[0];
+      body.removeChild(echoFrame);
       spawnedEcho = null;
 
       chrome.runtime.sendMessage({message: selectedString + " " + userText}, function(response) {
@@ -39,19 +39,19 @@ function spawnEchoForm(x, y, that) {
     that.echoSubmit.setAttribute("class", "echo-submit");
     that.echoForm.appendChild(that.echoSubmit);
 
-    that.echoTest = document.createElement("form");
-    that.echoTest.setAttribute("id", "test");
-    that.echoSubmit.appendChild(that.echoTest);
+    that.echoInputForm = document.createElement("form");
+    that.echoInputForm.setAttribute("id", "input-form");
+    that.echoSubmit.appendChild(that.echoInputForm);
 
     that.echoButton = document.createElement("button");
     that.echoButton.setAttribute("type", "submit");
-    that.echoTest.appendChild(that.echoButton);
+    that.echoInputForm.appendChild(that.echoButton);
 
     that.echoText = document.createElement("input");
     that.echoText.setAttribute("type", "text");
     that.echoText.setAttribute("id", "userText");
     that.echoText.setAttribute("name", "userText");
-    that.echoTest.appendChild(that.echoText);
+    that.echoInputForm.appendChild(that.echoText);
 
     that.fileRef = document.createElement("link");
     that.fileRef.setAttribute("rel", "stylesheet");
@@ -68,16 +68,6 @@ function spawnEchoForm(x, y, that) {
     return true;
 }
 
-function checkClickEventWithinForm(event, parent) {
-  var current = event.target;
-
-  while (current) {
-    if (current === parent) return true;
-    current = current.parentNode;
-  }
-  return false;
-}
-
 function hideSpawnedEcho(event) {
   var echoFrame = document.getElementsByClassName("echo-frame")[0];
 
@@ -89,4 +79,12 @@ function hideSpawnedEcho(event) {
   }
 };
 
+function checkClickEventWithinForm(event, parent) {
+  var current = event.target;
 
+  while (current) {
+    if (current === parent) return true;
+    current = current.parentNode;
+  }
+  return false;
+}
