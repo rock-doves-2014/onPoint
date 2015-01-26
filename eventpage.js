@@ -9,7 +9,7 @@ chrome.runtime.onMessage.addListener(
     xml.send(message);
 
     sendResponse({
-      // message: "Message: " + message
+      message: "Message: " + message
     });
 });
 
