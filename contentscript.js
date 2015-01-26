@@ -14,6 +14,7 @@ document.onmouseup = function run(event) {
 
       var userText = document.getElementById("userText").value;
       var selectedString = window.getSelection().toString();
+      var url = document.URL;
 
       closeEchoFormAfterSubmit();
 
