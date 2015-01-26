@@ -1,3 +1,7 @@
+  chrome.commands.onCommand.addListener(function(command) {
+    console.log('Command:', command);
+  });
+
 chrome.runtime.onMessage.addListener(
   function(echo, sender, sendResponse) {
 

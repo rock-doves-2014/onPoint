@@ -11,12 +11,6 @@ document.onmouseup = function run(event) {
     var userTextAndSubmitForm = document.getElementById("userTextAndSubmit");
     document.getElementById("userText").focus();
 
-    function alertmsg(){
-        alert("You pressed the keyboard inside the document!")
-    };
-    document.onkeypress("r") = alertmsg;
-
-
     userTextAndSubmitForm.addEventListener("submit", function(event){
       event.preventDefault();
 

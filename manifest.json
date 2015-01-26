@@ -33,8 +33,18 @@
 
   "web_accessible_resources" : ["sage_sound.png", "black_sound.png", "echofrom.html", "echoform.css"],
 
-  "content_scripts": [{
+  "content_scripts" : [{
     "matches" : ["<all_urls>"],
     "js" : ["contentscript.js"]
-    }]
+    }],
+
+  "commands" : {
+    "spawn-echo-form": {
+      "suggested_key": {
+        "default": "Ctrl+E",
+        "mac": "MacCtrl+E"
+      },
+      "description": "Spawn Echo Form"
+    }
+  }
 }
