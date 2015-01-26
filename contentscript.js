@@ -2,6 +2,29 @@ document.onmouseup = function run(event) {
   event.stopPropagation();
 
   if (window.getSelection() != "") {
+
+    var port = chrome.runtime.connect({name: "knockknock"});
+    port.postMessage({joke: "Knock knock"});
+
+    port.onMessage.addListener(function(msg) {
+
+      if (msg.question == "Who's there?")
+        port.postMessage({answer: "Madame"});
+
+      else if (msg.question == "Madame who?")
+        port.postMessage({answer: "Madame... Bovary"});
+
+    });
+
+
+
+
+
+
+
+
+
+
     var selectedString = window.getSelection().toString();
 
     spawnedEcho = spawnEchoForm(event.pageX, event.pageY, this);
@@ -11,13 +34,11 @@ document.onmouseup = function run(event) {
       event.preventDefault();
 
       var userText = document.getElementById("userText").value;
-      var url = document.URL;
 
       closeEchoFormAfterSubmit();
 
       chrome.runtime.sendMessage({
-        message: selectedString + " " + userText,
-        url: url
+        message: selectedString + " " + userText
       }, function(response) {
         console.log(response.message);
       });
