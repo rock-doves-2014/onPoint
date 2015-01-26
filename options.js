@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
   restore_options();
+  userRailsOauth();
   document.getElementById('myonoffswitch').addEventListener('click', save_options);
 });
 
@@ -35,5 +36,11 @@ function restore_options() {
     document.getElementById("facebookOn").checked = items.facebookOn;
     document.getElementById("facebookCharFloor").checked = items.facebookCharFloor;
     document.getElementById("alwaysAddUrl").checked = items.alwaysAddUrl;
+  });
+};
+
+function userRailsOauth() {
+  chrome.identity.getProfileUserInfo(function(userInfo) {
+
   });
 };
