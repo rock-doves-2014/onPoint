@@ -12,6 +12,7 @@
     "identity.email",
     "storage",
     "https://ajax.googleapis.com/",
+    "http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js",
     "http://localhost:3000/"
     //twitter, facebook, etc.
   ],

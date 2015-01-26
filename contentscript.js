@@ -2,29 +2,6 @@ document.onmouseup = function run(event) {
   event.stopPropagation();
 
   if (window.getSelection() != "") {
-
-    var port = chrome.runtime.connect({name: "knockknock"});
-    port.postMessage({joke: "Knock knock"});
-
-    port.onMessage.addListener(function(msg) {
-
-      if (msg.question == "Who's there?")
-        port.postMessage({answer: "Madame"});
-
-      else if (msg.question == "Madame who?")
-        port.postMessage({answer: "Madame... Bovary"});
-
-    });
-
-
-
-
-
-
-
-
-
-
     var selectedString = window.getSelection().toString();
 
     spawnedEcho = spawnEchoForm(event.pageX, event.pageY, this);
