@@ -12,3 +12,16 @@ chrome.runtime.onMessage.addListener(
       message: "Message: " + message
     });
 });
+
+chrome.identity.getProfileUserInfo(function(userInfo) {
+
+  console.log(userInfo);
+  console.log(userInfo.id);
+  console.log(userInfo.email);
+
+  // var xml = new XMLHttpRequest();
+  // xml.open("POST", "http://localhost:3000/api/echos", true);
+  // xml.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+  // xml.send(userInfo);
+
+})
