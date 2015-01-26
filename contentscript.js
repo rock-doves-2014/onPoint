@@ -3,10 +3,8 @@ document.onmouseup = function run(event) {
 
   if (window.getSelection() != "") {
 
-    xCoord = event.pageX;
-    yCoord = event.pageY;
     var that = this;
-    spawnedEcho = spawnEchoForm(xCoord, yCoord, that);
+    spawnedEcho = spawnEchoForm(event.pageX, event.pageY, that);
 
     var userTextAndSubmitForm = document.getElementById("userTextAndSubmit");
     document.getElementById("userText").focus();
