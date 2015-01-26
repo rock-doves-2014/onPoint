@@ -4,10 +4,9 @@ document.onmouseup = function run(event) {
   if (window.getSelection() != "") {
 
     spawnedEcho = spawnEchoForm(event.pageX, event.pageY, this);
-
-    var userTextAndSubmitForm = document.getElementById("userTextAndSubmit");
     document.getElementById("userText").focus();
 
+    var userTextAndSubmitForm = document.getElementById("userTextAndSubmit");
     userTextAndSubmitForm.addEventListener("submit", function(event){
       event.preventDefault();
 

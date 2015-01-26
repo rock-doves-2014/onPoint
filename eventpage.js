@@ -1,6 +1,6 @@
-  chrome.commands.onCommand.addListener(function(command) {
-    console.log('Command:', command);
-  });
+chrome.commands.onCommand.addListener(function(command) {
+  console.log('Command:', command);
+});
 
 chrome.runtime.onMessage.addListener(
   function(echo, sender, sendResponse) {
@@ -29,3 +29,4 @@ chrome.identity.getProfileUserInfo(function(userInfo) {
   // xml.send(userInfo);
 
 })
+
