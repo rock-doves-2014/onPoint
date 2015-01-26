@@ -2,16 +2,15 @@ document.onmouseup = function run(event) {
   event.stopPropagation();
 
   if (window.getSelection() != "") {
+    var selectedString = window.getSelection().toString();
 
     spawnedEcho = spawnEchoForm(event.pageX, event.pageY, this);
     document.getElementById("userText").focus();
 
-    var userTextAndSubmitForm = document.getElementById("userTextAndSubmit");
-    userTextAndSubmitForm.addEventListener("submit", function(event){
+    document.getElementById("userTextAndSubmit").addEventListener("submit", function(event){
       event.preventDefault();
 
       var userText = document.getElementById("userText").value;
-      var selectedString = window.getSelection().toString();
       var url = document.URL;
 
       closeEchoFormAfterSubmit();
