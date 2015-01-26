@@ -8,10 +8,16 @@ document.onmouseup = function run(event) {
     var that = this;
     spawnedEcho = spawnEchoForm(xCoord, yCoord, that);
 
-    var inputForm = document.getElementById("input-form");
+    var userTextAndSubmitForm = document.getElementById("userTextAndSubmit");
     document.getElementById("userText").focus();
 
-    inputForm.addEventListener("submit", function(event){
+    function alertmsg(){
+        alert("You pressed the keyboard inside the document!")
+    };
+    document.onkeypress("r") = alertmsg;
+
+
+    userTextAndSubmitForm.addEventListener("submit", function(event){
       event.preventDefault();
 
       var userText = document.getElementById("userText").value;
@@ -51,7 +57,7 @@ function spawnEchoForm(x, y, that) {
     that.echoForm.appendChild(that.echoSubmit);
 
     that.echoInputForm = document.createElement("form");
-    that.echoInputForm.setAttribute("id", "input-form");
+    that.echoInputForm.setAttribute("id", "userTextAndSubmit");
     that.echoSubmit.appendChild(that.echoInputForm);
 
     that.echoButton = document.createElement("button");
