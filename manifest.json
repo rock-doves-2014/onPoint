@@ -10,7 +10,8 @@
     "background",
     "identity",
     "storage",
-    "https://ajax.googleapis.com/"
+    "https://ajax.googleapis.com/",
+    "http://localhost:3000/"
     //twitter, facebook, etc.
   ],
 
