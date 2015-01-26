@@ -22,7 +22,7 @@ document.onmouseup = function run(event) {
         message: selectedString + " " + userText,
         url: url
       }, function(response) {
-        console.log(response.message);
+        // console.log(response.message);
       });
     });
 
