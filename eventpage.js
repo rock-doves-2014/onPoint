@@ -4,11 +4,11 @@ chrome.runtime.onMessage.addListener(
     var message = JSON.stringify(echo);
 
     var xml = new XMLHttpRequest();
-    xml.open("POST", "http://localhost:3000/json", true);
-    xml.send(echo);
+    xml.open("POST", "http://localhost:3000/api/echos", true);
+    xml.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xml.send(message);
 
     sendResponse({
-      message: "Message: " + echo.message,
-      senderID: "SenderID: " + sender.id
+      message: "Message: " + message
     });
 });
