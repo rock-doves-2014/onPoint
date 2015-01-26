@@ -17,7 +17,11 @@ document.onmouseup = function run(event) {
 
       closeEchoFormAfterSubmit();
 
-      chrome.runtime.sendMessage({message: selectedString + " " + userText}, function(response) {
+      chrome.runtime.sendMessage({
+        message: selectedString + " " + userText,
+        url: url
+      }, function(response) {
+        console.log(response.message);
       });
     });
 
