@@ -9,6 +9,8 @@ document.onmouseup = function run(event) {
     spawnedEcho = spawnEchoForm(xCoord, yCoord, that);
 
     var inputForm = document.getElementById("input-form");
+    document.getElementById("userText").focus();
+
     inputForm.addEventListener("submit", function(event){
       event.preventDefault();
 
