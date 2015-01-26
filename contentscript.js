@@ -14,10 +14,15 @@ document.onmouseup = function run(event) {
 
       var userText = document.getElementById("userText").value;
       var selectedString = window.getSelection().toString();
+      var url = document.URL;
 
       closeEchoFormAfterSubmit();
 
-      chrome.runtime.sendMessage({message: selectedString + " " + userText}, function(response) {
+      chrome.runtime.sendMessage({
+        message: selectedString + " " + userText,
+        url: url
+      }, function(response) {
+        console.log(response.message);
       });
     });
 
