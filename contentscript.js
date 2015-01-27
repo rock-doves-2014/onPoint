@@ -6,6 +6,7 @@ document.onmouseup = function run(event1) {
   if (window.getSelection() != "") {
     var keys = [];
     var selectedString = window.getSelection().toString();
+    console.log(selectedString)
 
     onkeydown = onkeyup = function(event2) {
       keys[event2.keyCode] = event2.type == 'keydown';
@@ -25,6 +26,7 @@ document.onmouseup = function run(event1) {
 
           closeEchoFormAfterSubmit();
           echoForm = false
+
 
             chrome.runtime.sendMessage({
               message: selectedString + " " + userText
@@ -133,17 +135,20 @@ function checkClickEventWithinForm(event, parent) {
   return false;
 };
 
-// var limit = 140
-// function wordCount(textField, showCountField){
-//   if (textField.value.length > limit){
-//     textField.value = textField.value.substring(0, limit)
-//   } else {
-//     showCountField.value = limit - textField.value.length
-//   }
-// }
-
-
-
-//   var count = ('#userText').getValue().length;
-//   echoTextCharCount.html.update(limit - count);
-// }
+function textHighlight() {
+  var range;
+  var sel = window.getSelection();
+  if (sel.rangeCount && sel.getRangeAt) {
+      range = sel.getRangeAt(0);
+      console.log(range);
+  }
+  document.designMode = "on";
+  if (range) {
+    sel.removeAllRanges();
+    sel.addRange(range);
+  }
+  if (!document.execCommand("HiliteColor", false, "#B6FCD5")) {
+    document.execCommand("BackColor", false, "#B6FCD5");
+  }
+  document.designMode = "off";
+}
