@@ -10,15 +10,17 @@ document.onmouseup = function run(event1) {
       if ( (keys[17] === true) && (keys[69] === true) ) {
         event2.preventDefault();
 
+        textHighlight();
         spawnedEcho = spawnEchoForm(event1.pageX, event1.pageY, this);
 
         var userTextandSubmitForm = document.getElementById("userTextAndSubmit");
         userTextandSubmitForm.addEventListener("submit", function(event3){
           event3.preventDefault();
 
-      var userText = document.getElementById("userText").value;
+        var userText = document.getElementById("userText").value;
 
-      closeEchoFormAfterSubmit();
+        closeEchoFormAfterSubmit();
+        removeHighlight(selectedString);
 
           chrome.runtime.sendMessage({
             message: selectedString + " " + userText
@@ -126,17 +128,26 @@ function checkClickEventWithinForm(event, parent) {
   return false;
 };
 
-// var limit = 140
-// function wordCount(textField, showCountField){
-//   if (textField.value.length > limit){
-//     textField.value = textField.value.substring(0, limit)
-//   } else {
-//     showCountField.value = limit - textField.value.length
-//   }
-// }
+function textHighlight() {
+  var range = "";
+  var sel = window.getSelection();
+  if (sel.rangeCount && sel.getRangeAt) {
+      range = sel.getRangeAt(0);
+  }
 
+  document.designMode = "on";
+  document.execCommand("BackColor", false, "#B6FCD5");
+  document.designMode = "off";
+}
 
+function removeHighlight(selectedString) {
+  var range = "";
+  var sel = window.find(selectedString);
+  if (sel.rangeCount && sel.getRangeAt) {
+    range = sel.getRangeAt(0);
+  }
 
-//   var count = ('#userText').getValue().length;
-//   echoTextCharCount.html.update(limit - count);
-// }
+  document.designMode = "on";
+  document.execCommand("BackColor", false, "#FFFFFF");
+  document.designMode = "off";
+}
