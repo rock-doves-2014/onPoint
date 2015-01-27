@@ -63,7 +63,7 @@ function spawnEchoForm(x, y, that) {
     that.echoText.setAttribute("type", "text");
     that.echoText.setAttribute("id", "userText");
     that.echoText.setAttribute("name", "userText");
-    that.echoText.setAttribute("placeholder", "add to your Echo here");
+    that.echoText.setAttribute("placeholder", "add to your Echo");
 
     that.echoInputForm.appendChild(that.echoText);
 
