@@ -69,14 +69,17 @@ function spawnEchoForm(x, y, that) {
     that.echoTextCharCount.setAttribute("id", "char-count");
     that.echoInputForm.appendChild(that.echoTextCharCount);
 
-    that.closeButtonX = document.createElement("span");
-    that.closeButtonX.setAttribute("id", "close-button");
-    that.echoSubmit.appendChild(that.closeButtonX);
-
     var shortenedUrlLength = 25; //subject to change based on length of shortered URL
-    var getCharCount = window.getSelection().toString().length + shortenedUrlLength;
-    var getCharCountCreateTextNode = document.createTextNode(getCharCount);
-    that.echoTextCharCount.appendChild(getCharCountCreateTextNode);
+    var userSelectedString = window.getSelection().toString();
+    var lengthOfUserText = that.echoText.value.length;
+    var charCount = userSelectedString.length + shortenedUrlLength + lengthOfUserText;
+    that.echoTextCharCount.innerHTML = charCount;
+
+    that.echoText.addEventListener("keyup", function(event) {
+      lengthOfUserText = that.echoText.value.length;
+      charCount = userSelectedString.length + shortenedUrlLength + lengthOfUserText;
+      that.echoTextCharCount.innerHTML = charCount;
+    });
 
 
     that.fileRef = document.createElement("link");
