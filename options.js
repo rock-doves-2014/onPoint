@@ -41,6 +41,13 @@ function restore_options() {
 
 function userRailsOauth() {
   chrome.identity.getProfileUserInfo(function(userInfo) {
+    var message = JSON.stringify(userInfo);
 
+    var xml = new XMLHttpRequest();
+    xml.open("POST", "http://localhost:3000/api/users", true);
+    xml.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xml.setRequestHeader("Accept", "application/json");
+    xml.send(message);
   });
 };
+
