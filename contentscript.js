@@ -1,4 +1,7 @@
+var echoForm = false;
+
 document.onmouseup = function run(event1) {
+  echoForm = false
 
   if (window.getSelection() != "") {
     var keys = [];
@@ -10,22 +13,26 @@ document.onmouseup = function run(event1) {
       if ( (keys[17] === true) && (keys[69] === true) ) {
         event2.preventDefault();
 
-        spawnedEcho = spawnEchoForm(event1.pageX, event1.pageY, this);
+      if ( echoForm === false ) {
+          spawnedEcho = spawnEchoForm(event1.pageX, event1.pageY, this);
+          echoForm = true;
 
-        var userTextandSubmitForm = document.getElementById("userTextAndSubmit");
-        userTextandSubmitForm.addEventListener("submit", function(event3){
-          event3.preventDefault();
+          var userTextandSubmitForm = document.getElementById("userTextAndSubmit");
+          userTextandSubmitForm.addEventListener("submit", function(event3){
+            event3.preventDefault();
 
-      var userText = document.getElementById("userText").value;
+          var userText = document.getElementById("userText").value;
 
-      closeEchoFormAfterSubmit();
+          closeEchoFormAfterSubmit();
+          echoForm = false
 
-          chrome.runtime.sendMessage({
-            message: selectedString + " " + userText
-          }, function(response) {
-            console.log(response.message);
+            chrome.runtime.sendMessage({
+              message: selectedString + " " + userText
+            }, function(response) {
+              console.log(response.message);
+            });
           });
-        });
+        };
 
         document.onmousedown = function remove(event4) {
           hideSpawnedEcho(event4);
