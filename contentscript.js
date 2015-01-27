@@ -1,32 +1,38 @@
-document.onmouseup = function run(event) {
-  event.stopPropagation();
+document.onkeypress = function run(event) {
+  kp = String.fromCharCode(event.charCode);
+  if (kp === "e") {
 
-  if (window.getSelection() != "") {
-    var selectedString = window.getSelection().toString();
+// document.onmouseup = function run(event) {
+  // event.stopPropagation();
 
-    spawnedEcho = spawnEchoForm(event.pageX, event.pageY, this);
-    document.getElementById("userText").focus();
+    if (window.getSelection() != "") {
 
-    document.getElementById("userTextAndSubmit").addEventListener("submit", function(event){
-      event.preventDefault();
+      var selectedString = window.getSelection().toString();
 
-      var userText = document.getElementById("userText").value;
+      spawnedEcho = spawnEchoForm(event.pageX, event.pageY, this);
+      document.getElementById("userText").focus();
 
-      closeEchoFormAfterSubmit();
+      document.getElementById("userTextAndSubmit").addEventListener("submit", function(event){
+        event.preventDefault();
 
-      chrome.runtime.sendMessage({
-        message: selectedString + " " + userText
-      }, function(response) {
-        console.log(response.message);
+        var userText = document.getElementById("userText").value;
+
+        closeEchoFormAfterSubmit();
+
+        chrome.runtime.sendMessage({
+          message: selectedString + " " + userText
+        }, function(response) {
+          console.log(response.message);
+        });
       });
-    });
 
-    document.onmousedown = function remove(event) {
-      hideSpawnedEcho(event);
+      document.onmousedown = function remove(event) {
+        hideSpawnedEcho(event);
+      };
     };
-
   };
 };
+
 
 function closeEchoFormAfterSubmit() {
   var echoFrame = document.getElementsByClassName("echo-frame")[0];
