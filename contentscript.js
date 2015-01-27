@@ -2,6 +2,7 @@ document.onmouseup = function run(event1) {
 
   if (window.getSelection() != "") {
     var keys = [];
+    var selectedString = window.getSelection().toString();
 
     onkeydown = onkeyup = function(event2) {
       keys[event2.keyCode] = event2.type == 'keydown';
