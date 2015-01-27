@@ -6,7 +6,6 @@ document.onmouseup = function run(event1) {
   if (window.getSelection() != "") {
     var keys = [];
     var selectedString = window.getSelection().toString();
-    console.log(selectedString)
 
     onkeydown = onkeyup = function(event2) {
       keys[event2.keyCode] = event2.type == 'keydown';
@@ -26,6 +25,9 @@ document.onmouseup = function run(event1) {
 
           closeEchoFormAfterSubmit();
           echoForm = false
+
+<<<<<<< HEAD
+=======
 
 
             chrome.runtime.sendMessage({
@@ -136,19 +138,25 @@ function checkClickEventWithinForm(event, parent) {
 };
 
 function textHighlight() {
-  var range;
+  var range = "";
   var sel = window.getSelection();
   if (sel.rangeCount && sel.getRangeAt) {
       range = sel.getRangeAt(0);
-      console.log(range);
   }
+
   document.designMode = "on";
-  if (range) {
-    sel.removeAllRanges();
-    sel.addRange(range);
+  document.execCommand("BackColor", false, "#B6FCD5");
+  document.designMode = "off";
+}
+
+function removeHighlight(selectedString) {
+  var range = "";
+  var sel = window.find(selectedString);
+  if (sel.rangeCount && sel.getRangeAt) {
+    range = sel.getRangeAt(0);
   }
-  if (!document.execCommand("HiliteColor", false, "#B6FCD5")) {
-    document.execCommand("BackColor", false, "#B6FCD5");
-  }
+
+  document.designMode = "on";
+  document.execCommand("BackColor", false, "#FFFFFF");
   document.designMode = "off";
 }
