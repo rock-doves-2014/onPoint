@@ -66,6 +66,16 @@ function spawnEchoForm(x, y, that) {
     that.echoText.setAttribute("placeholder", "add to your Echo");
 
     that.echoInputForm.appendChild(that.echoText);
+    that.echoTextCharCount = document.createElement("div");
+    that.echoTextCharCount.setAttribute("id", "char-count");
+
+    that.echoInputForm.appendChild(that.echoTextCharCount);
+    var startCharCount = document.createTextNode("140");
+    that.echoTextCharCount.appendChild(startCharCount);
+    // window.onload = function(){
+    // var test = document.getElementById('#char-count').innerHTML = "('<span>140</span>')";
+    // console.log(test);
+    // }
 
     that.fileRef = document.createElement("link");
     that.fileRef.setAttribute("rel", "stylesheet");
@@ -115,3 +125,18 @@ function checkClickEventWithinForm(event, parent) {
   }
   return false;
 };
+
+// var limit = 140
+// function wordCount(textField, showCountField){
+//   if (textField.value.length > limit){
+//     textField.value = textField.value.substring(0, limit)
+//   } else {
+//     showCountField.value = limit - textField.value.length
+//   }
+// }
+
+
+
+//   var count = ('#userText').getValue().length;
+//   echoTextCharCount.html.update(limit - count);
+// }
