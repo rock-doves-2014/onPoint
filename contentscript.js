@@ -17,9 +17,9 @@ document.onmouseup = function run(event1) {
         userTextandSubmitForm.addEventListener("submit", function(event3){
           event3.preventDefault();
 
-          var userText = document.getElementById("userText").value;
+      var userText = document.getElementById("userText").value;
 
-          closeEchoFormAfterSubmit();
+      closeEchoFormAfterSubmit();
 
           chrome.runtime.sendMessage({
             message: selectedString + " " + userText
@@ -70,12 +70,10 @@ function spawnEchoForm(x, y, that) {
     that.echoTextCharCount.setAttribute("id", "char-count");
 
     that.echoInputForm.appendChild(that.echoTextCharCount);
-    var startCharCount = document.createTextNode("140");
-    that.echoTextCharCount.appendChild(startCharCount);
-    // window.onload = function(){
-    // var test = document.getElementById('#char-count').innerHTML = "('<span>140</span>')";
-    // console.log(test);
-    // }
+
+    var getCharCount = window.getSelection().toString().length;
+    var getCharCountCreateTextNote = document.createTextNode(getCharCount);
+    that.echoTextCharCount.appendChild(getCharCountCreateTextNote);
 
     that.fileRef = document.createElement("link");
     that.fileRef.setAttribute("rel", "stylesheet");
