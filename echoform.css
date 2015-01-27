@@ -59,3 +59,11 @@ div.echo-submit{
 .echo-submit input[type=text]:focus {
   outline: 0;
 }
+
+#close-button {
+  margin-bottom: 100px;
+  color: #000000;
+  font-size: 2em;
+  padding: 50px 50px 20px 275px;
+
+}

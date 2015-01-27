@@ -17,9 +17,9 @@ document.onmouseup = function run(event1) {
         userTextandSubmitForm.addEventListener("submit", function(event3){
           event3.preventDefault();
 
-          var userText = document.getElementById("userText").value;
+      var userText = document.getElementById("userText").value;
 
-          closeEchoFormAfterSubmit();
+      closeEchoFormAfterSubmit();
 
           chrome.runtime.sendMessage({
             message: selectedString + " " + userText
@@ -66,6 +66,19 @@ function spawnEchoForm(x, y, that) {
     that.echoText.setAttribute("placeholder", "add to your Echo");
 
     that.echoInputForm.appendChild(that.echoText);
+    that.echoTextCharCount = document.createElement("div");
+    that.echoTextCharCount.setAttribute("id", "char-count");
+    that.echoInputForm.appendChild(that.echoTextCharCount);
+
+    that.closeButtonX = document.createElement("span");
+    that.closeButtonX.setAttribute("id", "close-button");
+    that.echoSubmit.appendChild(that.closeButtonX);
+
+    var shortenedUrlLength = 25; //subject to change based on length of shortered URL
+    var getCharCount = window.getSelection().toString().length + shortenedUrlLength;
+    var getCharCountCreateTextNode = document.createTextNode(getCharCount);
+    that.echoTextCharCount.appendChild(getCharCountCreateTextNode);
+
 
     that.fileRef = document.createElement("link");
     that.fileRef.setAttribute("rel", "stylesheet");
@@ -115,3 +128,18 @@ function checkClickEventWithinForm(event, parent) {
   }
   return false;
 };
+
+// var limit = 140
+// function wordCount(textField, showCountField){
+//   if (textField.value.length > limit){
+//     textField.value = textField.value.substring(0, limit)
+//   } else {
+//     showCountField.value = limit - textField.value.length
+//   }
+// }
+
+
+
+//   var count = ('#userText').getValue().length;
+//   echoTextCharCount.html.update(limit - count);
+// }
