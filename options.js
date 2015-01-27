@@ -42,11 +42,29 @@ function userRailsOauth() {
   chrome.identity.getProfileUserInfo(function(userInfo) {
     var message = JSON.stringify(userInfo);
 
-    var xml = new XMLHttpRequest();
-    xml.open("POST", "http://localhost:3000/api/users", true);
-    xml.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    xml.setRequestHeader("Accept", "application/json");
-    xml.send(message);
+    var promise = new Promise(function(resolve, reject){
+      var xml = new XMLHttpRequest();
+      xml.open("POST", "http://localhost:3000/api/users", true);
+      xml.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+      xml.setRequestHeader("Accept", "application/json");
+      xml.onload = function() {
+        if(xml.status === 200) {
+          var responseString = JSON.parse(xml.response);
+          chrome.storage.sync.set({
+            'chrome_token': responseString.key
+          }, function() {
+            var status = document.getElementById('status');
+            status.textContent = 'Options saved!';
+            setTimeout(function() {
+              status.textContent = '';
+            }, 750);
+          });
+        } else {
+          reject("Your response was bad.")
+        };
+      };
+      xml.send(message);
+    });
+    return promise;
   });
 };
-
