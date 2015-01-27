@@ -8,10 +8,9 @@ document.onmouseup = function run(event1) {
       keys[event2.keyCode] = event2.type == 'keydown';
 
       if ( (keys[17] === true) && (keys[69] === true) ) {
-        var selectedString = window.getSelection().toString();
+        event2.preventDefault();
 
         spawnedEcho = spawnEchoForm(event1.pageX, event1.pageY, this);
-        // document.getElementById("userText").focus();
 
         var userTextandSubmitForm = document.getElementById("userTextAndSubmit");
         userTextandSubmitForm.addEventListener("submit", function(event3){
@@ -95,13 +94,8 @@ function spawnEchoForm(x, y, that) {
       that.echoForm.style.left = x + "px";
     };
 
-    // if ( y > (document.body.clientHeight - 50) ) {
-      // y = document.body.clientWidth - 100;
-      // that.echoForm.style.top = y + "px";
-    // } else {
-      y = y + 15;
-      that.echoForm.style.top = y + "px";
-    // };
+    y = y + 15;
+    that.echoForm.style.top = y + "px";
 
     body = document.getElementsByTagName("body")[0];
     body.appendChild(that.echoForm);
