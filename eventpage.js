@@ -7,10 +7,11 @@ chrome.runtime.onMessage.addListener(
     xml.open("POST", "http://localhost:3000/api/echos", true);
     xml.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     xml.send(message);
-    //message: selectedText + userText
+    //body: selectedText + userText
     //chrome_token: chrome_token
     //google_credentials: google_credentials
     //url: url
+    //is_draft: boolean (can be omitted)
 
     sendResponse({
       message: "Message: " + message
