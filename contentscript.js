@@ -1,37 +1,35 @@
-document.onmouseup = function run(event) {
-  event.stopPropagation();
-
+document.onmouseup = function run(event1) {
   if (window.getSelection() != "") {
+    var keys = [];
+    onkeydown = onkeyup = function(event2) {
+      keys[event2.keyCode] = event2.type == 'keydown';
 
-    xCoord = event.pageX;
-    yCoord = event.pageY;
-    var that = this;
-    spawnedEcho = spawnEchoForm(xCoord, yCoord, that);
+      if ( (keys[17] === true) && (keys[69] === true) ) {
+        var selectedString = window.getSelection().toString();
 
-    var inputForm = document.getElementById("input-form");
-    document.getElementById("userText").focus();
+        spawnedEcho = spawnEchoForm(event1.pageX, event1.pageY, this);
+        document.getElementById("userText").focus();
 
-    inputForm.addEventListener("submit", function(event){
-      event.preventDefault();
+        var userTextandSubmitForm = document.getElementById("userTextAndSubmit");
+        userTextandSubmitForm.addEventListener("submit", function(event3){
+          event3.preventDefault();
 
-      var userText = document.getElementById("userText").value;
-      var selectedString = window.getSelection().toString();
-      var url = document.URL;
+          var userText = document.getElementById("userText").value;
 
-      closeEchoFormAfterSubmit();
+          closeEchoFormAfterSubmit();
 
-      chrome.runtime.sendMessage({
-        message: selectedString + " " + userText,
-        url: url
-      }, function(response) {
-        console.log(response.message);
-      });
-    });
+          chrome.runtime.sendMessage({
+            message: selectedString + " " + userText
+          }, function(response) {
+            console.log(response.message);
+          });
+        });
 
-    document.onmousedown = function remove(event) {
-      hideSpawnedEcho(event);
+        document.onmousedown = function remove(event4) {
+          hideSpawnedEcho(event4);
+        };
+      };
     };
-
   };
 };
 
@@ -51,7 +49,7 @@ function spawnEchoForm(x, y, that) {
     that.echoForm.appendChild(that.echoSubmit);
 
     that.echoInputForm = document.createElement("form");
-    that.echoInputForm.setAttribute("id", "input-form");
+    that.echoInputForm.setAttribute("id", "userTextAndSubmit");
     that.echoSubmit.appendChild(that.echoInputForm);
 
     that.echoButton = document.createElement("button");
