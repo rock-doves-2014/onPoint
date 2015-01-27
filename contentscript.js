@@ -11,7 +11,7 @@ document.onmouseup = function run(event1) {
         var selectedString = window.getSelection().toString();
 
         spawnedEcho = spawnEchoForm(event1.pageX, event1.pageY, this);
-        document.getElementById("userText").focus();
+        // document.getElementById("userText").focus();
 
         var userTextandSubmitForm = document.getElementById("userTextAndSubmit");
         userTextandSubmitForm.addEventListener("submit", function(event3){
@@ -72,9 +72,21 @@ function spawnEchoForm(x, y, that) {
     document.getElementsByTagName("head")[0].appendChild(that.fileRef);
 
     that.echoForm.style.visibility = "visible";
-    that.echoForm.style.left = x + "px";
-    y = y + 15;
-    that.echoForm.style.top = y + "px";
+
+    if ( x > (document.body.clientWidth - 300) ) {
+      x = document.body.clientWidth - 310;
+      that.echoForm.style.left = x + "px";
+    } else {
+      that.echoForm.style.left = x + "px";
+    };
+
+    // if ( y > (document.body.clientHeight - 50) ) {
+      // y = document.body.clientWidth - 100;
+      // that.echoForm.style.top = y + "px";
+    // } else {
+      y = y + 15;
+      that.echoForm.style.top = y + "px";
+    // };
 
     body = document.getElementsByTagName("body")[0];
     body.appendChild(that.echoForm);
