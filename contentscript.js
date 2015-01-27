@@ -71,7 +71,8 @@ function spawnEchoForm(x, y, that) {
 
     that.echoInputForm.appendChild(that.echoTextCharCount);
 
-    var getCharCount = window.getSelection().toString().length;
+    var shortenedUrlLength = 25; //subject to change based on length of shortered URL
+    var getCharCount = window.getSelection().toString().length + shortenedUrlLength;
     var getCharCountCreateTextNote = document.createTextNode(getCharCount);
     that.echoTextCharCount.appendChild(getCharCountCreateTextNote);
 
