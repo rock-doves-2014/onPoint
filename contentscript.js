@@ -70,12 +70,9 @@ function spawnEchoForm(x, y, that) {
     that.echoTextCharCount.setAttribute("id", "char-count");
     that.echoInputForm.appendChild(that.echoTextCharCount);
 
-    that.closeButtonX = document.createElement("span");
-    that.closeButtonX.setAttribute("id", "close-button");
-    that.echoSubmit.appendChild(that.closeButtonX);
-
     var shortenedUrlLength = 25; //subject to change based on length of shortered URL
-    var getCharCount = window.getSelection().toString().length + shortenedUrlLength;
+    var lengthOfUserText = document.getElementById("userText").value.length;
+    var getCharCount = window.getSelection().toString().length + shortenedUrlLength + lengthOfUserText;
     var getCharCountCreateTextNode = document.createTextNode(getCharCount);
     that.echoTextCharCount.appendChild(getCharCountCreateTextNode);
 
