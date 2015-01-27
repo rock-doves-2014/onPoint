@@ -1,37 +1,38 @@
-document.onmouseup = function run(event) {
-  event.stopPropagation();
+document.onmouseup = function run(event1) {
 
   if (window.getSelection() != "") {
+    var keys = [];
+    var selectedString = window.getSelection().toString();
 
-    xCoord = event.pageX;
-    yCoord = event.pageY;
-    var that = this;
-    spawnedEcho = spawnEchoForm(xCoord, yCoord, that);
+    onkeydown = onkeyup = function(event2) {
+      keys[event2.keyCode] = event2.type == 'keydown';
 
-    var inputForm = document.getElementById("input-form");
-    document.getElementById("userText").focus();
+      if ( (keys[17] === true) && (keys[69] === true) ) {
+        var selectedString = window.getSelection().toString();
 
-    inputForm.addEventListener("submit", function(event){
-      event.preventDefault();
+        spawnedEcho = spawnEchoForm(event1.pageX, event1.pageY, this);
+        // document.getElementById("userText").focus();
 
-      var userText = document.getElementById("userText").value;
-      var selectedString = window.getSelection().toString();
-      var url = document.URL;
+        var userTextandSubmitForm = document.getElementById("userTextAndSubmit");
+        userTextandSubmitForm.addEventListener("submit", function(event3){
+          event3.preventDefault();
 
-      closeEchoFormAfterSubmit();
+          var userText = document.getElementById("userText").value;
 
-      chrome.runtime.sendMessage({
-        message: selectedString + " " + userText,
-        url: url
-      }, function(response) {
-        console.log(response.message);
-      });
-    });
+          closeEchoFormAfterSubmit();
 
-    document.onmousedown = function remove(event) {
-      hideSpawnedEcho(event);
+          chrome.runtime.sendMessage({
+            message: selectedString + " " + userText
+          }, function(response) {
+            console.log(response.message);
+          });
+        });
+
+        document.onmousedown = function remove(event4) {
+          hideSpawnedEcho(event4);
+        };
+      };
     };
-
   };
 };
 
@@ -51,7 +52,7 @@ function spawnEchoForm(x, y, that) {
     that.echoForm.appendChild(that.echoSubmit);
 
     that.echoInputForm = document.createElement("form");
-    that.echoInputForm.setAttribute("id", "input-form");
+    that.echoInputForm.setAttribute("id", "userTextAndSubmit");
     that.echoSubmit.appendChild(that.echoInputForm);
 
     that.echoButton = document.createElement("button");
@@ -62,6 +63,8 @@ function spawnEchoForm(x, y, that) {
     that.echoText.setAttribute("type", "text");
     that.echoText.setAttribute("id", "userText");
     that.echoText.setAttribute("name", "userText");
+    that.echoText.setAttribute("placeholder", "add to your Echo here");
+
     that.echoInputForm.appendChild(that.echoText);
 
     that.fileRef = document.createElement("link");
@@ -71,8 +74,21 @@ function spawnEchoForm(x, y, that) {
     document.getElementsByTagName("head")[0].appendChild(that.fileRef);
 
     that.echoForm.style.visibility = "visible";
-    that.echoForm.style.left = x + "px";
-    that.echoForm.style.top = y + "px";
+
+    if ( x > (document.body.clientWidth - 300) ) {
+      x = document.body.clientWidth - 310;
+      that.echoForm.style.left = x + "px";
+    } else {
+      that.echoForm.style.left = x + "px";
+    };
+
+    // if ( y > (document.body.clientHeight - 50) ) {
+      // y = document.body.clientWidth - 100;
+      // that.echoForm.style.top = y + "px";
+    // } else {
+      y = y + 15;
+      that.echoForm.style.top = y + "px";
+    // };
 
     body = document.getElementsByTagName("body")[0];
     body.appendChild(that.echoForm);
