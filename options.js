@@ -1,21 +1,22 @@
 document.addEventListener('DOMContentLoaded', function() {
   restore_options();
   userRailsOauth();
-  document.getElementById('myonoffswitch').addEventListener('click', save_options);
+  document.getElementById('myonoffswitch').addEventListener('click', function() {
+    save_options();
+  });
 });
 
 function save_options() {
-  var twitterSwitch = document.getElementById("twitterOn").checked;
-  var faceBookSwitch = document.getElementById("facebookOn").checked;
-  var fbFloorSwitch = document.getElementById("facebookCharFloor").checked;
-  var alwaysUrlSwitch = document.getElementById("alwaysAddUrl").checked;
+  // var twitterSwitch = document.getElementById("twitterOn").checked;
+  // var faceBookSwitch = document.getElementById("facebookOn").checked;
+  // var fbFloorSwitch = document.getElementById("facebookCharFloor").checked;
+  // var alwaysUrlSwitch = document.getElementById("alwaysAddUrl").checked;
 
   chrome.storage.sync.set({
-    twitterOn: tw,
-    facebookOn: fb,
-    facebookCharFloor: fbFloor,
-    alwaysAddUrl: url
-
+    twitterOn: twitterSwitch,
+    facebookOn: faceBookSwitch,
+    facebookCharFloor: fbFloorSwitch,
+    alwaysAddUrl: alwaysUrlSwitch
   }, function() {
     var status = document.getElementById('status');
     status.textContent = 'Options saved!';
