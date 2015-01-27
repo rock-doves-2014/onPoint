@@ -74,29 +74,10 @@ function spawnEchoForm(x, y, that) {
     that.closeButtonX.setAttribute("id", "close-button");
     that.echoSubmit.appendChild(that.closeButtonX);
 
-    var textForCloseButtonX = "X";
-    var textforCloseButtonXCreateTextNode = document.createTextNode(textForCloseButtonX);
-    that.closeButtonX.appendChild(textforCloseButtonXCreateTextNode);
-
     var shortenedUrlLength = 25; //subject to change based on length of shortered URL
     var getCharCount = window.getSelection().toString().length + shortenedUrlLength;
     var getCharCountCreateTextNode = document.createTextNode(getCharCount);
     that.echoTextCharCount.appendChild(getCharCountCreateTextNode);
-    // function hideOnClick(){
-    //   document.getElementById("echo-frame").style.visibility = "hidden"
-    // };
- // function close_button(target){
-    //   document.getElementById(target).style.display = 'none';
-    //   // document.getElementsByClassName("echo-frame").style.display = 'none';
-    // }
-
-    // function close_echo_frame(target){
-    //   // document.getElementById("close-button").style.display = 'none';
-    //   document.getElementsByClassName(target).style.display = 'none';
-    // }
-
-    // close_button("close_button");
-    // close_echo_frame("echo-frame");
 
 
     that.fileRef = document.createElement("link");
