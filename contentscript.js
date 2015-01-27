@@ -1,6 +1,8 @@
 document.onmouseup = function run(event1) {
+
   if (window.getSelection() != "") {
     var keys = [];
+
     onkeydown = onkeyup = function(event2) {
       keys[event2.keyCode] = event2.type == 'keydown';
 
@@ -70,6 +72,7 @@ function spawnEchoForm(x, y, that) {
 
     that.echoForm.style.visibility = "visible";
     that.echoForm.style.left = x + "px";
+    y = y + 15;
     that.echoForm.style.top = y + "px";
 
     body = document.getElementsByTagName("body")[0];
