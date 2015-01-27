@@ -1,38 +1,37 @@
-document.onkeypress = function run(event) {
-  kp = String.fromCharCode(event.charCode);
-  if (kp === "e") {
+document.onmouseup = function run(event1) {
+  if (window.getSelection() != "") {
+    var keys = [];
+    onkeydown = onkeyup = function(event2) {
+      keys[event2.keyCode] = event2.type == 'keydown';
 
-// document.onmouseup = function run(event) {
-  // event.stopPropagation();
+      if ( (keys[17] === true) && (keys[69] === true) ) {
+        var selectedString = window.getSelection().toString();
 
-    if (window.getSelection() != "") {
+        spawnedEcho = spawnEchoForm(event1.pageX, event1.pageY, this);
+        document.getElementById("userText").focus();
 
-      var selectedString = window.getSelection().toString();
+        var userTextandSubmitForm = document.getElementById("userTextAndSubmit");
+        userTextandSubmitForm.addEventListener("submit", function(event3){
+          event3.preventDefault();
 
-      spawnedEcho = spawnEchoForm(event.pageX, event.pageY, this);
-      document.getElementById("userText").focus();
+          var userText = document.getElementById("userText").value;
 
-      document.getElementById("userTextAndSubmit").addEventListener("submit", function(event){
-        event.preventDefault();
+          closeEchoFormAfterSubmit();
 
-        var userText = document.getElementById("userText").value;
-
-        closeEchoFormAfterSubmit();
-
-        chrome.runtime.sendMessage({
-          message: selectedString + " " + userText
-        }, function(response) {
-          console.log(response.message);
+          chrome.runtime.sendMessage({
+            message: selectedString + " " + userText
+          }, function(response) {
+            console.log(response.message);
+          });
         });
-      });
 
-      document.onmousedown = function remove(event) {
-        hideSpawnedEcho(event);
+        document.onmousedown = function remove(event4) {
+          hideSpawnedEcho(event4);
+        };
       };
     };
   };
 };
-
 
 function closeEchoFormAfterSubmit() {
   var echoFrame = document.getElementsByClassName("echo-frame")[0];
