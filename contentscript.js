@@ -3,7 +3,6 @@ document.onmouseup = function run(event1) {
 
   if (window.getSelection() != "") {
     var keys = [];
-    var selectedString = window.getSelection().toString();
 
     onkeydown = onkeyup = function(event2) {
       keys[event2.keyCode] = event2.type == 'keydown';
@@ -12,14 +11,18 @@ document.onmouseup = function run(event1) {
         event2.preventDefault();
 
         if ( echoForm === false ) {
+          var selectedString = window.getSelection().toString();
           // not protected variable!
           spawnedEcho = spawnEchoForm(event1.pageX, event1.pageY, this);
           echoForm = true;
-          textHighlight();
+
+          console.log("Before submit: " + selectedString);
 
           var userTextandSubmitForm = document.getElementById("userTextAndSubmit");
           userTextandSubmitForm.addEventListener("submit", function(event3){
             event3.preventDefault();
+
+            console.log("Button submit: " + selectedString);
 
             var userText = document.getElementById("userText").value;
 
@@ -34,7 +37,8 @@ document.onmouseup = function run(event1) {
           });
         };
 
-        document.onmousedown = function remove(event4, selectedString) {
+        document.onmousedown = function run(event4, selectedString) {
+          console.log("Inside hide: " + selectedString);
           hideSpawnedEcho(event4, selectedString);
         };
       };
@@ -70,8 +74,8 @@ function spawnEchoForm(x, y, that) {
   that.echoText.setAttribute("id", "userText");
   that.echoText.setAttribute("name", "userText");
   that.echoText.setAttribute("placeholder", "add to your Echo");
-
   that.echoInputForm.appendChild(that.echoText);
+
   that.echoTextCharCount = document.createElement("div");
   that.echoTextCharCount.setAttribute("id", "char-count");
   that.echoInputForm.appendChild(that.echoTextCharCount);
@@ -108,6 +112,8 @@ function spawnEchoForm(x, y, that) {
 
   body = document.getElementsByTagName("body")[0];
   body.appendChild(that.echoForm);
+  textHighlight();
+  document.getElementById("userText").focus();
   return true;
 };
 
@@ -134,11 +140,7 @@ function checkClickEventWithinForm(event, parent) {
 };
 
 function textHighlight() {
-  var range = "";
-  var sel = window.getSelection();
-  if (sel.rangeCount && sel.getRangeAt) {
-    range = sel.getRangeAt(0);
-  }
+  window.getSelection();
 
   document.designMode = "on";
   document.execCommand("BackColor", false, "#B6FCD5");
@@ -146,13 +148,10 @@ function textHighlight() {
 }
 
 function removeHighlight(selectedString) {
-  var range = "";
-  var sel = window.find(selectedString);
-  if (sel.rangeCount && sel.getRangeAt) {
-    range = sel.getRangeAt(0);
-  }
+  window.find(selectedString);
 
   document.designMode = "on";
   document.execCommand("BackColor", false, "#FFFFFF");
   document.designMode = "off";
+  window.getSelection().removeAllRanges();
 }
