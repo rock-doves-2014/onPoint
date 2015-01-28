@@ -12,7 +12,7 @@
     "identity.email",
     "storage",
     "https://ajax.googleapis.com/",
-    "http://localhost:3000/"
+    "https://echoko.herokuapp.com/"
     //twitter, facebook, etc.
   ],
 
