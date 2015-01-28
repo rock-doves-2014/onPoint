@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', function() {
   userRailsOauth();
   twitterOauthStarter();
+  facebookOauthStarter();
 });
 
 function userRailsOauth() {
@@ -44,5 +45,19 @@ function twitterOauthStarter() {
   document.getElementById('TwitterOauth').addEventListener('click', function(event) {
     event.preventDefault();
     RailsTwitterOauth();
+  });
+};
+
+function RailsFacebookOauth() {
+  chrome.identity.getProfileUserInfo(function(userInfo) {
+    var message = JSON.stringify(userInfo);
+    chrome.tabs.create({ url: "http://localhost:3000/auth/facebook" });
+  });
+};
+
+function facebookOauthStarter() {
+  document.getElementById('FacebookOauth').addEventListener('click', function(event) {
+    event.preventDefault();
+    RailsFacebookOauth();
   });
 };
