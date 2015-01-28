@@ -108,9 +108,11 @@ function spawnEchoForm(x, y, that) {
       document.getElementById("char-count").style.color="#c0392b";
     }
     else {
-      document.getElementById("char-count").style.backgroundColor="transparent";
+      document.getElementById("char-count").style.color="#000000";
     }
   });
+
+
 
   that.fileRef = document.createElement("link");
   that.fileRef.setAttribute("rel", "stylesheet");
