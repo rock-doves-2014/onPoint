@@ -1,3 +1,4 @@
+
 /*CSS reset to immunize our form against wild CSS*/
   div.echo-frame, .echo-frame div, .echo-frame button, .echo-frame input, .echo-frame p {
     margin: 0;
@@ -42,7 +43,7 @@ div.echo-submit{
   background: url('black_sound.png') center no-repeat #B6FCD5;
 }
 
-.echo-frame input[type=text] {
+.echo-frame input#userText {
   background-color: #ecf0f1;
   color: #333333;
   position: relative;
@@ -52,11 +53,11 @@ div.echo-submit{
   height: 25px;
   padding: 3px 5px 2px 50px;
   font-size: 1em;
-  width: 65%;
+  width: 160px;
   border: 1px solid #333333;
 }
 
-.echo-submit input[type=text]:focus {
+.echo-submit input#userText:focus {
   outline: 0;
 }
 
@@ -67,11 +68,3 @@ div.echo-submit{
   padding: 50px 50px 20px 275px;
 
 }
-
-#char-count {
-  float: right;
-  padding-top: 15px;
-  padding-right: 20px;
-  position: relative;
-}
-
