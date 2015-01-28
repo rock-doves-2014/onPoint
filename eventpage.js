@@ -4,7 +4,7 @@ chrome.runtime.onMessage.addListener(
       chrome.identity.getProfileUserInfo(function(userInfo) {
         echo['google_credentials'] = userInfo.email;
       });
-      chrome.storage.local.get('chrome_token', function(items) {
+      chrome.storage.sync.get('chrome_token', function(items) {
         echo['chrome_token'] = items.chrome_token
       });
       echo['url'] = sender.url
