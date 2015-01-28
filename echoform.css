@@ -1,6 +1,10 @@
 
+
+
+
+
 /*CSS reset to immunize our form against wild CSS*/
-  div.echo-frame, .echo-frame div, .echo-frame button, .echo-frame input, .echo-frame p {
+  div.echo-frame, .echo-frame div, .echo-frame button, .echo-frame input, .echo-frame p, #char-count {
     margin: 0;
     padding: 0;
     border: 0;
@@ -21,7 +25,7 @@ div.echo-frame {
   height: 44px;
   background-color: rgba(220,220,220, 1);
   border-radius: 50px;
-  z-index: 5000;
+  z-index: 9999;
 }
 
 div.echo-submit{
@@ -52,19 +56,24 @@ div.echo-submit{
   border-radius: 50px;
   height: 25px;
   padding: 3px 5px 2px 50px;
-  font-size: 1em;
-  width: 160px;
-  border: 1px solid #333333;
+  font-size: 13px;
+  width: 215px;
+  border: 2px solid;
 }
 
-.echo-submit input#userText:focus {
+div.echo-submit input#userText:focus {
   outline: 0;
 }
 
-#close-button {
-  margin-bottom: 100px;
-  color: #000000;
-  font-size: 2em;
-  padding: 50px 50px 20px 275px;
 
+#char-count {
+  width: 30px;
+  height: 30px;
+  padding: 5px 0 0 0;
+  opacity: .8;
+  display: inline-block;
+  font-size: 12px;
+  line-height: 0px;
+  text-align: center;
+  margin-left: -40px;
 }
