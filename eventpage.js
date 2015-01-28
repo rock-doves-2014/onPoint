@@ -27,7 +27,3 @@ chrome.runtime.onMessage.addListener(
     });
 });
 
-chrome.identity.getProfileUserInfo(function(userInfo) {
-
-})
-
