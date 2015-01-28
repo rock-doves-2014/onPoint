@@ -1,9 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
   userRailsOauth();
-  document.getElementById('TwitterOauth').addEventListener('click', function(event) {
-    event.preventDefault();
-    RailsTwitterOauth();
-  });
+  twitterOauthStarter();
 });
 
 function userRailsOauth() {
@@ -40,5 +37,12 @@ function RailsTwitterOauth() {
   chrome.identity.getProfileUserInfo(function(userInfo) {
     var message = JSON.stringify(userInfo);
     chrome.tabs.create({ url: "http://localhost:3000/auth/twitter?google_credentials=" + userInfo.email });
+  });
+};
+
+function twitterOauthStarter() {
+  document.getElementById('TwitterOauth').addEventListener('click', function(event) {
+    event.preventDefault();
+    RailsTwitterOauth();
   });
 };
