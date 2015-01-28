@@ -1,17 +1,20 @@
-document.onmouseup = function run(event1) {
+window.onmouseup = function run(event1) {
+  console.log("Mouse Up.... Line 1!");
   var echoForm = false
 
   if (window.getSelection() != "") {
     var keys = [];
+    var selectedString = window.getSelection().toString();
 
     onkeydown = onkeyup = function(event2) {
       keys[event2.keyCode] = event2.type == 'keydown';
 
       if ( (keys[17] === true) && (keys[69] === true) ) {
         event2.preventDefault();
+        (keys[17] = false);
+        (keys[69] = false);
 
         if ( echoForm === false ) {
-          var selectedString = window.getSelection().toString();
           // not protected variable!
           spawnedEcho = spawnEchoForm(event1.pageX, event1.pageY, this);
           echoForm = true;
@@ -22,7 +25,7 @@ document.onmouseup = function run(event1) {
           userTextandSubmitForm.addEventListener("submit", function(event3){
             event3.preventDefault();
 
-            console.log("Button submit: " + selectedString);
+            console.log("Inside button submit: " + selectedString);
 
             var userText = document.getElementById("userText").value;
 
@@ -32,13 +35,13 @@ document.onmouseup = function run(event1) {
             chrome.runtime.sendMessage({
               message: selectedString + " " + userText
             }, function(response) {
-              console.log(response.message);
+              // response from eventpage.js
             });
           });
         };
 
-        document.onmousedown = function run(event4, selectedString) {
-          console.log("Inside hide: " + selectedString);
+        document.onmouseup = function(event4) {
+          console.log("Inside MouseDown/UP: " + selectedString);
           hideSpawnedEcho(event4, selectedString);
         };
       };
@@ -50,6 +53,7 @@ function closeEchoFormAfterSubmit(selectedString) {
   var echoFrame = document.getElementsByClassName("echo-frame")[0];
   body.removeChild(echoFrame);
   spawnedEcho = null;
+  console.log("Greetings from Close Form: " + selectedString);
   removeHighlight(selectedString);
 };
 
@@ -117,13 +121,16 @@ function spawnEchoForm(x, y, that) {
   return true;
 };
 
-function hideSpawnedEcho(event, selectedString) {
+function hideSpawnedEcho(event4, selectedString) {
   var echoFrame = document.getElementsByClassName("echo-frame")[0];
+  console.log("Hide Spawned: " + selectedString);
+  console.log(spawnedEcho);
 
   if (spawnedEcho) {
-    if (!checkClickEventWithinForm(event, echoFrame)) {
+    if (!checkClickEventWithinForm(event4, echoFrame)) {
       body.removeChild(echoFrame);
       spawnedEcho = null;
+      console.log("almost to remove: " + selectedString);
       removeHighlight(selectedString);
     }
   }
@@ -148,10 +155,11 @@ function textHighlight() {
 }
 
 function removeHighlight(selectedString) {
+  console.log("greeting from remove: " + selectedString);
   window.find(selectedString);
 
   document.designMode = "on";
-  document.execCommand("BackColor", false, "#FFFFFF");
+  document.execCommand("backcolor", false, "#FFFFFF");
   document.designMode = "off";
   window.getSelection().removeAllRanges();
 }
