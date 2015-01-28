@@ -2,7 +2,7 @@ chrome.runtime.onMessage.addListener(
   function(echo, sender, sendResponse) {
     var promise = new Promise(function(resolve, reject) {
       chrome.identity.getProfileUserInfo(function(userInfo) {
-        echo['google_credentials'] = userInfo.id;
+        echo['google_credentials'] = userInfo.email;
       });
       chrome.storage.local.get('chrome_token', function(items) {
         echo['chrome_token'] = items.chrome_token
@@ -26,8 +26,4 @@ chrome.runtime.onMessage.addListener(
       });
     });
 });
-
-chrome.identity.getProfileUserInfo(function(userInfo) {
-
-})
 
