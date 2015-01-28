@@ -96,6 +96,22 @@ function spawnEchoForm(x, y, that) {
     that.echoTextCharCount.innerHTML = charCount;
   });
 
+  that.echoText.addEventListener("keyup", function(event) {
+    lengthOfUserText = that.echoText.value.length;
+    charCount = userSelectedString.length + shortenedUrlLength + lengthOfUserText;
+    that.echoTextCharCount.innerHTML = charCount;
+
+    if (charCount > 119 && charCount < 140){
+      document.getElementById("char-count").style.color="#e67e22";
+    }
+    else if (charCount > 139){
+      document.getElementById("char-count").style.color="#c0392b";
+    }
+    else {
+      document.getElementById("char-count").style.backgroundColor="transparent";
+    }
+  });
+
   that.fileRef = document.createElement("link");
   that.fileRef.setAttribute("rel", "stylesheet");
   that.fileRef.setAttribute("type", "text/css");
