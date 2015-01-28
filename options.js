@@ -44,15 +44,14 @@ function restore_options() {
 
 function userRailsOauth() {
   chrome.identity.getProfileUserInfo(function(userInfo) {
-    var message = JSON.stringify(userInfo);
 
-    var promise = new Promise(function(resolve, reject){
+    var promise = new Promise(function(resolve, reject) {
       var xml = new XMLHttpRequest();
       xml.open("POST", "http://localhost:3000/api/users", true);
       xml.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
       xml.setRequestHeader("Accept", "application/json");
       xml.onload = function() {
-        if(xml.status === 200) {
+        if (xml.status === 200) {
           var responseString = JSON.parse(xml.response);
           chrome.storage.sync.set({
             'chrome_token': responseString.key
@@ -67,7 +66,13 @@ function userRailsOauth() {
           reject("Your response was bad.")
         };
       };
-      xml.send(message);
+      var timer = setInterval(function() {
+        if (userInfo['email'] != "" && userInfo['id'] != "") {
+          var message = JSON.stringify(userInfo);
+          xml.send(message);
+          clearInterval(timer);
+        }
+      }, 100)
     });
     return promise;
   });
