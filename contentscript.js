@@ -80,7 +80,7 @@ function spawnEchoForm(x, y, that) {
   that.echoText.setAttribute("placeholder", "add to your Echo");
   that.echoInputForm.appendChild(that.echoText);
 
-  that.echoTextCharCount = document.createElement("div");
+  that.echoTextCharCount = document.createElement("span");
   that.echoTextCharCount.setAttribute("id", "char-count");
   that.echoInputForm.appendChild(that.echoTextCharCount);
 
@@ -102,13 +102,17 @@ function spawnEchoForm(x, y, that) {
     that.echoTextCharCount.innerHTML = charCount;
 
     if (charCount > 119 && charCount < 140){
-      document.getElementById("char-count").style.color="#e67e22";
+      document.getElementById("userText").style.borderColor="#3B5998";
+      document.getElementById("char-count").style.color="#333333";
     }
     else if (charCount > 139){
-      document.getElementById("char-count").style.color="#c0392b";
+      document.getElementById("userText").style.borderColor="#000000";
+      document.getElementById("char-count").style.color="#333333";
+
     }
     else {
-      document.getElementById("char-count").style.color="#000000";
+      document.getElementById("userText").style.borderColor="#B6FCD5";
+      document.getElementById("char-count").style.color="#333333";
     }
   });
 
