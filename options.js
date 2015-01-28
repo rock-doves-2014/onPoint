@@ -42,7 +42,7 @@ function RailsTwitterOauth() {
 };
 
 function twitterOauthStarter() {
-  document.getElementById('TwitterOauth').addEventListener('click', function(event) {
+  document.getElementById('TwitterEchoAuth').addEventListener('click', function(event) {
     event.preventDefault();
     RailsTwitterOauth();
   });
@@ -56,7 +56,7 @@ function RailsFacebookOauth() {
 };
 
 function facebookOauthStarter() {
-  document.getElementById('FacebookOauth').addEventListener('click', function(event) {
+  document.getElementById('FacebookEchoAuth').addEventListener('click', function(event) {
     event.preventDefault();
     RailsFacebookOauth();
   });
