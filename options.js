@@ -4,6 +4,10 @@ document.addEventListener('DOMContentLoaded', function() {
   document.getElementById('myonoffswitch').addEventListener('click', function() {
     save_options();
   });
+  document.getElementById('TwitterOauth').addEventListener('click', function(event) {
+    event.preventDefault();
+    RailsTwitterOauth();
+  });
 });
 
 function save_options() {
@@ -66,5 +70,12 @@ function userRailsOauth() {
       xml.send(message);
     });
     return promise;
+  });
+};
+
+function RailsTwitterOauth() {
+  chrome.identity.getProfileUserInfo(function(userInfo) {
+    var message = JSON.stringify(userInfo);
+    chrome.tabs.create({ url: "http://localhost:3000/auth/twitter?google_credentials=" + userInfo.email });
   });
 };
