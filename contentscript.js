@@ -72,7 +72,7 @@ function spawnEchoForm(x, y, that) {
     that.echoText.setAttribute("placeholder", "add to your Echo");
 
     that.echoInputForm.appendChild(that.echoText);
-    that.echoTextCharCount = document.createElement("div");
+    that.echoTextCharCount = document.createElement("span");
     that.echoTextCharCount.setAttribute("id", "char-count");
     that.echoInputForm.appendChild(that.echoTextCharCount);
 
