@@ -10,6 +10,7 @@
 .echo-opts h2 {
     color: #333333;
     opacity: .7;
+    margin-top: -9px;
 }
 
 #sage-sound-logo {
@@ -124,50 +125,3 @@ h3 {
   color: #333333;
 }
 
-/*
-.onoffswitch-2 {
-    position: relative; width: 58px;
-    -webkit-user-select:none; -moz-user-select:none; -ms-user-select: none;
-}
-.onoffswitch-checkbox-2 {
-    display: none;
-}
-.onoffswitch-label-2 {
-    display: block; overflow: hidden; cursor: pointer;
-    border: 2px solid #999999; border-radius: 25px;
-}
-.onoffswitch-inner-2 {
-    display: block; width: 200%; margin-left: -100%;
-    -moz-transition: margin 0.3s ease-in 0s; -webkit-transition: margin 0.3s ease-in 0s;
-    -o-transition: margin 0.3s ease-in 0s; transition: margin 0.3s ease-in 0s;
-}
-.onoffswitch-inner-2:before, .onoffswitch-inner-2:after {
-    display: block; float: left; width: 50%; height: 21px; padding: 0; line-height: 21px;
-    font-size: 10px; color: white; font-family: Trebuchet, Arial, sans-serif; font-weight: bold;
-    -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;
-}
-.onoffswitch-inner-2:before {
-    content: "ON";
-    padding-left: 10px;
-    background-color: #333333; color: #ecf0f1;
-}
-.onoffswitch-inner-2:after {
-    content: "OFF";
-    padding-right: 10px;
-    background-color: #EEEEEE; color: #999999;
-    text-align: right;
-}
-.onoffswitch-switch-2 {
-    display: block; width: 11px; margin: 5px;
-    background: #B6FCD5;
-    border: 2px solid #999999; border-radius: 25px;
-    position: absolute; top: 0; bottom: 0; right: 33px;
-    -moz-transition: all 0.3s ease-in 0s; -webkit-transition: all 0.3s ease-in 0s;
-    -o-transition: all 0.3s ease-in 0s; transition: all 0.3s ease-in 0s;
-}
-.onoffswitch-checkbox-2:checked + .onoffswitch-label-2 .onoffswitch-inner-2 {
-    margin-left: 0;
-}
-.onoffswitch-checkbox-2:checked + .onoffswitch-label-2 .onoffswitch-switch-2 {
-    right: 0px;
-}*/
