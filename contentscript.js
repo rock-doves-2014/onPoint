@@ -101,7 +101,6 @@ function spawnEchoForm(x, y, that, selectedString) {
   that.echoHighLight.setAttribute("name", "userHighLight");
   that.echoHighLight.setAttribute("rows", "4");
   that.echoHighLight.setAttribute("cols", "20");
-
   that.echoHighLight.value = selectedString;
   that.echoInputForm.appendChild(that.echoHighLight);
 
@@ -110,20 +109,15 @@ function spawnEchoForm(x, y, that, selectedString) {
   that.echoInputForm.appendChild(that.echoTextCharCount);
 
   var shortenedUrlLength = 25; //subject to change based on length of shortered URL
-  var userSelectedString = window.getSelection().toString();
+  var echoHighlight = window.getSelection().toString();
   var lengthOfUserText = that.echoText.value.length;
-  var charCount = userSelectedString.length + shortenedUrlLength + lengthOfUserText;
+  var charCount = shortenedUrlLength + echoHighlight.length + lengthOfUserText;
   that.echoTextCharCount.innerHTML = charCount;
+  console.log(that.echoTextCharCount.innerHTML);
 
   that.echoText.addEventListener("keyup", function(event) {
     lengthOfUserText = that.echoText.value.length;
-    charCount = userSelectedString.length + shortenedUrlLength + lengthOfUserText;
-    that.echoTextCharCount.innerHTML = charCount;
-  });
-
-  that.echoText.addEventListener("keyup", function(event) {
-    lengthOfUserText = that.echoText.value.length;
-    charCount = userSelectedString.length + shortenedUrlLength + lengthOfUserText;
+    charCount = shortenedUrlLength + echoHighlight.length + lengthOfUserText;
     that.echoTextCharCount.innerHTML = charCount;
 
     if (charCount > 119 && charCount < 140){
