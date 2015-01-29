@@ -24,7 +24,7 @@ window.onmouseup = function run(event1) {
           userTextandSubmitForm.addEventListener("submit", function(event3){
             event3.preventDefault();
 
-            var finalUserHighLight = document.getElementById.("userHighLight").value
+            var finalUserHighLight = document.getElementById("userHighLight").value
             var userText = document.getElementById("userText").value;
 
             closeEchoFormAfterSubmit(selectedString);
