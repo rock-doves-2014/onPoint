@@ -97,7 +97,7 @@ function spawnEchoForm(x, y, that, selectedString) {
   that.echoInputForm.appendChild(that.echoText);
 
   that.echoHighLight = document.createElement("input");
-  that.echoHighLight.setAttribute("type", "textarea");
+  that.echoHighLight.setAttribute("type", "paragraph");
   that.echoHighLight.setAttribute("id", "userHighLight");
   that.echoHighLight.setAttribute("name", "userHighLight");
   that.echoHighLight.setAttribute("value", selectedString);
