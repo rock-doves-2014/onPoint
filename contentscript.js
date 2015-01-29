@@ -96,11 +96,13 @@ function spawnEchoForm(x, y, that, selectedString) {
   that.echoText.setAttribute("placeholder", "add to your Echo");
   that.echoInputForm.appendChild(that.echoText);
 
-  that.echoHighLight = document.createElement("input");
-  that.echoHighLight.setAttribute("type", "paragraph");
+  that.echoHighLight = document.createElement("textarea");
   that.echoHighLight.setAttribute("id", "userHighLight");
   that.echoHighLight.setAttribute("name", "userHighLight");
-  that.echoHighLight.setAttribute("value", selectedString);
+  that.echoHighLight.setAttribute("rows", "4");
+  that.echoHighLight.setAttribute("cols", "20");
+
+  that.echoHighLight.value = selectedString;
   that.echoInputForm.appendChild(that.echoHighLight);
 
   that.echoTextCharCount = document.createElement("span");
