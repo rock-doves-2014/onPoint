@@ -12,6 +12,7 @@
     "identity.email",
     "storage",
     "https://ajax.googleapis.com/",
+    "https://test-echo-api.herokuapp.com/",
     "https://echoko.herokuapp.com/"
     //twitter, facebook, etc.
   ],
