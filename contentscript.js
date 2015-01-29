@@ -124,16 +124,13 @@ function spawnEchoForm(x, y, that, selectedString) {
     charCount = shortenedUrlLength + editableEchoHighLight + lengthOfUserText;
     that.echoTextCharCount.innerHTML = charCount;
 
-    if (charCount > 119 && charCount < 140){
+    if (charCount > 119 && charCount < 140) {
       document.getElementById("userText").style.borderColor="#3B5998";
       document.getElementById("char-count").style.color="#333333";
-    }
-    else if (charCount > 139){
+    } else if (charCount > 139){
       document.getElementById("userText").style.borderColor="#000000";
       document.getElementById("char-count").style.color="#333333";
-
-    }
-    else {
+    } else {
       document.getElementById("userText").style.borderColor="#B6FCD5";
       document.getElementById("char-count").style.color="#333333";
     }
@@ -147,8 +144,8 @@ function spawnEchoForm(x, y, that, selectedString) {
 
   that.echoForm.style.visibility = "visible";
 
-  if ( x > (document.body.clientWidth - 300) ) {
-    x = document.body.clientWidth - 310;
+  if ( x > (document.body.clientWidth - 390) ) {
+    x = document.body.clientWidth - 400;
     that.echoForm.style.left = x + "px";
   } else {
     that.echoForm.style.left = x + "px";
