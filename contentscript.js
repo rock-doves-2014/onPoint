@@ -1,44 +1,43 @@
 window.onmouseup = function run(event1) {
-  var echoForm = false
+  var echoFormExists = false;
 
   if (window.getSelection() != "") {
-    var keys = [];
-
     var selectedString = window.getSelection().toString();
+    var keys = [];
 
     onkeydown = onkeyup = function(event2) {
       keys[event2.keyCode] = event2.type == 'keydown';
 
       if ( (keys[17] === true) && (keys[69] === true) ) {
         event2.preventDefault();
-        (keys[17] = false);
-        (keys[69] = false);
 
-        if ( echoForm === false ) {
+        if ( echoFormExists === false ) {
          // not protected variable!
           spawnedEcho = spawnEchoForm(event1.pageX, event1.pageY, this, selectedString);
           window.getSelection().removeAllRanges();
-          echoForm = true;
+          echoFormExists = true;
 
           var userTextandSubmitForm = document.getElementById("userTextAndSubmit");
           userTextandSubmitForm.addEventListener("submit", function(event3){
             event3.preventDefault();
 
+            var finalUserHighLight = document.getElementById("userHighLight").value
             var userText = document.getElementById("userText").value;
 
-            closeEchoFormAfterSubmit(selectedString);
-            echoForm = false;
+            closeEchoFormAfterSubmit();
 
             chrome.runtime.sendMessage({
-              message: selectedString + " " + userText
+              message: finalUserHighLight + " " + userText
             }, function(response) {
               // response from eventpage.js
             });
+
+            finalUserHighLight = "";
+            userText = "";
           });
 
           document.onmousedown = function(event4) {
-            console.log("Inside MouseDown: " + selectedString);
-            hideSpawnedEcho(selectedString);
+            hideSpawnedEcho();
           };
         };
       };
@@ -46,19 +45,31 @@ window.onmouseup = function run(event1) {
   };
 };
 
-function closeEchoFormAfterSubmit(selectedString) {
-  var echoFrame = document.getElementsByClassName("echo-frame")[0];
-  body.removeChild(echoFrame);
-  spawnedEcho = null;
+function closeEchoFormAfterSubmit() {
+  echoThat();
+  setTimeout(function(){
+    var echoFrame = document.getElementsByClassName("echo-frame")[0];
+    body.removeChild(echoFrame);
+    echoFormExists = false;
+  }, 1250);
 };
 
-function hideSpawnedEcho(selectedString) {
+function echoThat() {
+  var confirm = document.getElementById("char-count");
+  confirm.innerHTML = "Echo...";
+
+  setTimeout(function(){
+    confirm.innerHTML = "that!";
+  }, 750);
+}
+
+function hideSpawnedEcho() {
   var echoFrame = document.getElementsByClassName("echo-frame")[0];
 
   if (spawnedEcho) {
     if (!checkClickEventWithinForm(event, echoFrame)) {
       body.removeChild(echoFrame);
-      spawnedEcho = null;
+      echoFormExists = false;
     }
   }
 };
@@ -96,48 +107,50 @@ function spawnEchoForm(x, y, that, selectedString) {
   that.echoText.setAttribute("placeholder", "add to your Echo");
   that.echoInputForm.appendChild(that.echoText);
 
-  that.echoHighLight = document.createElement("input");
-  that.echoHighLight.setAttribute("type", "paragraph");
+  that.echoHighLight = document.createElement("textarea");
   that.echoHighLight.setAttribute("id", "userHighLight");
   that.echoHighLight.setAttribute("name", "userHighLight");
-  that.echoHighLight.setAttribute("value", selectedString);
+  that.echoHighLight.setAttribute("rows", "4");
+  that.echoHighLight.setAttribute("cols", "20");
+  that.echoHighLight.value = selectedString;
   that.echoInputForm.appendChild(that.echoHighLight);
 
   that.echoTextCharCount = document.createElement("span");
   that.echoTextCharCount.setAttribute("id", "char-count");
+  that.echoTextCharCount.style.color= "#ffffff";
   that.echoInputForm.appendChild(that.echoTextCharCount);
 
   var shortenedUrlLength = 25; //subject to change based on length of shortered URL
-  var userSelectedString = window.getSelection().toString();
+  var editableEchoHighLight = selectedString.length;
   var lengthOfUserText = that.echoText.value.length;
-  var charCount = userSelectedString.length + shortenedUrlLength + lengthOfUserText;
+  var charCount = shortenedUrlLength + editableEchoHighLight + lengthOfUserText;
   that.echoTextCharCount.innerHTML = charCount;
 
-  that.echoText.addEventListener("keyup", function(event) {
-    lengthOfUserText = that.echoText.value.length;
-    charCount = userSelectedString.length + shortenedUrlLength + lengthOfUserText;
+  that.echoHighLight.addEventListener("keyup", function(event) {
+    editableEchoHighLight = that.echoHighLight.value.length;
+    charCount = shortenedUrlLength + editableEchoHighLight + lengthOfUserText;
     that.echoTextCharCount.innerHTML = charCount;
+
+    updateCharColor();
   });
 
   that.echoText.addEventListener("keyup", function(event) {
     lengthOfUserText = that.echoText.value.length;
-    charCount = userSelectedString.length + shortenedUrlLength + lengthOfUserText;
+    charCount = shortenedUrlLength + editableEchoHighLight + lengthOfUserText;
     that.echoTextCharCount.innerHTML = charCount;
 
-    if (charCount > 119 && charCount < 140){
-      document.getElementById("userText").style.borderColor="#3B5998";
-      document.getElementById("char-count").style.color="#333333";
-    }
-    else if (charCount > 139){
-      document.getElementById("userText").style.borderColor="#000000";
-      document.getElementById("char-count").style.color="#333333";
+    updateCharColor();
+  });
 
-    }
-    else {
+  function updateCharColor() {
+    if (charCount < 141) {
       document.getElementById("userText").style.borderColor="#B6FCD5";
-      document.getElementById("char-count").style.color="#333333";
+      document.getElementById("userHighLight").style.borderColor="#B6FCD5";
+    } else {
+      document.getElementById("userText").style.borderColor="#3B5998";
+      document.getElementById("userHighLight").style.borderColor="#3B5998";
     }
-  });
+  };
 
   that.fileRef = document.createElement("link");
   that.fileRef.setAttribute("rel", "stylesheet");
@@ -147,14 +160,15 @@ function spawnEchoForm(x, y, that, selectedString) {
 
   that.echoForm.style.visibility = "visible";
 
-  if ( x > (document.body.clientWidth - 300) ) {
-    x = document.body.clientWidth - 310;
+  if ( x > (document.body.clientWidth - 390) ) {
+    x = document.body.clientWidth - 400;
     that.echoForm.style.left = x + "px";
   } else {
+    x = x - 25;
     that.echoForm.style.left = x + "px";
   };
 
-  y = y + 15;
+  y = y + 20;
   that.echoForm.style.top = y + "px";
 
   body = document.getElementsByTagName("body")[0];
