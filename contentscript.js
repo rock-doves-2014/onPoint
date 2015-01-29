@@ -1,5 +1,5 @@
 window.onmouseup = function run(event1) {
-  var echoForm = false
+  var echoFormExists = false;
 
   if (window.getSelection() != "") {
     var keys = [];
@@ -11,14 +11,12 @@ window.onmouseup = function run(event1) {
 
       if ( (keys[17] === true) && (keys[69] === true) ) {
         event2.preventDefault();
-        (keys[17] = false);
-        (keys[69] = false);
 
-        if ( echoForm === false ) {
+        if ( echoFormExists === false ) {
          // not protected variable!
           spawnedEcho = spawnEchoForm(event1.pageX, event1.pageY, this, selectedString);
           window.getSelection().removeAllRanges();
-          echoForm = true;
+          echoFormExists = true;
 
           var userTextandSubmitForm = document.getElementById("userTextAndSubmit");
           userTextandSubmitForm.addEventListener("submit", function(event3){
@@ -27,8 +25,7 @@ window.onmouseup = function run(event1) {
             var finalUserHighLight = document.getElementById("userHighLight").value
             var userText = document.getElementById("userText").value;
 
-            closeEchoFormAfterSubmit(selectedString);
-            echoForm = false;
+            closeEchoFormAfterSubmit();
 
             chrome.runtime.sendMessage({
               message: finalUserHighLight + " " + userText
@@ -41,8 +38,7 @@ window.onmouseup = function run(event1) {
           });
 
           document.onmousedown = function(event4) {
-            hideSpawnedEcho(selectedString);
-            echoForm = false;
+            hideSpawnedEcho();
           };
         };
       };
@@ -50,12 +46,12 @@ window.onmouseup = function run(event1) {
   };
 };
 
-function closeEchoFormAfterSubmit(selectedString) {
+function closeEchoFormAfterSubmit() {
   echoThat();
   setTimeout(function(){
     var echoFrame = document.getElementsByClassName("echo-frame")[0];
     body.removeChild(echoFrame);
-    spawnedEcho = null;
+    echoFormExists = false;
   }, 1250);
 };
 
@@ -68,13 +64,13 @@ function echoThat() {
   }, 750);
 }
 
-function hideSpawnedEcho(selectedString) {
+function hideSpawnedEcho() {
   var echoFrame = document.getElementsByClassName("echo-frame")[0];
 
   if (spawnedEcho) {
     if (!checkClickEventWithinForm(event, echoFrame)) {
       body.removeChild(echoFrame);
-      spawnedEcho = null;
+      echoFormExists = false;
     }
   }
 };
