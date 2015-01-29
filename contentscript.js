@@ -46,10 +46,22 @@ window.onmouseup = function run(event1) {
 };
 
 function closeEchoFormAfterSubmit(selectedString) {
-  var echoFrame = document.getElementsByClassName("echo-frame")[0];
-  body.removeChild(echoFrame);
-  spawnedEcho = null;
+  echoThat();
+  setTimeout(function(){
+    var echoFrame = document.getElementsByClassName("echo-frame")[0];
+    body.removeChild(echoFrame);
+    spawnedEcho = null;
+  }, 1250);
 };
+
+function echoThat() {
+  var confirm = document.getElementById("char-count");
+  confirm.innerHTML = "Echo...";
+
+  setTimeout(function(){
+    confirm.innerHTML = "that!";
+  }, 750);
+}
 
 function hideSpawnedEcho(selectedString) {
   var echoFrame = document.getElementsByClassName("echo-frame")[0];
