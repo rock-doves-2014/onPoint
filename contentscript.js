@@ -117,6 +117,16 @@ function spawnEchoForm(x, y, that, selectedString) {
     editableEchoHighLight = that.echoHighLight.value.length;
     charCount = shortenedUrlLength + editableEchoHighLight + lengthOfUserText;
     that.echoTextCharCount.innerHTML = charCount;
+
+    if (charCount < 141) {
+      document.getElementById("userText").style.borderColor="#B6FCD5";
+      document.getElementById("userHighLight").style.borderColor="#B6FCD5";
+      document.getElementById("char-count").style.color="#333333";
+    } else {
+      document.getElementById("userText").style.borderColor="#3B5998";
+      document.getElementById("userHighLight").style.borderColor="#3B5998";
+      document.getElementById("char-count").style.color="#333333";
+    }
   });
 
   that.echoText.addEventListener("keyup", function(event) {
@@ -124,14 +134,13 @@ function spawnEchoForm(x, y, that, selectedString) {
     charCount = shortenedUrlLength + editableEchoHighLight + lengthOfUserText;
     that.echoTextCharCount.innerHTML = charCount;
 
-    if (charCount > 119 && charCount < 140) {
-      document.getElementById("userText").style.borderColor="#3B5998";
-      document.getElementById("char-count").style.color="#333333";
-    } else if (charCount > 139){
-      document.getElementById("userText").style.borderColor="#000000";
+    if (charCount < 141) {
+      document.getElementById("userText").style.borderColor="#B6FCD5";
+      document.getElementById("userHighLight").style.borderColor="#B6FCD5";
       document.getElementById("char-count").style.color="#333333";
     } else {
-      document.getElementById("userText").style.borderColor="#B6FCD5";
+      document.getElementById("userText").style.borderColor="#3B5998";
+      document.getElementById("userHighLight").style.borderColor="#3B5998";
       document.getElementById("char-count").style.color="#333333";
     }
   });
