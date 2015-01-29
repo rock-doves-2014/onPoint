@@ -54,10 +54,10 @@ div.echo-submit{
   top: -13px;
   border-radius: 7.5px;
   height: 25px;
-  padding: 3px 5px 2px 50px;
+  padding: 3px 5px 2px 5px;
   font-size: 13px;
-  width: 215px;
-  border: 2px solid;
+  width: 325px;
+  border: 2px solid #B6FCD5;
 }
 
 div.echo-submit input#userText:focus {
