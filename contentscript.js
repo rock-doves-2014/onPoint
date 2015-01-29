@@ -24,13 +24,14 @@ window.onmouseup = function run(event1) {
           userTextandSubmitForm.addEventListener("submit", function(event3){
             event3.preventDefault();
 
+            var finalUserHighLight = that.echoHighLight.value
             var userText = document.getElementById("userText").value;
 
             closeEchoFormAfterSubmit(selectedString);
             echoForm = false;
 
             chrome.runtime.sendMessage({
-              message: selectedString + " " + userText
+              message: finalUserHighLight + " " + userText
             }, function(response) {
               // response from eventpage.js
             });
@@ -38,6 +39,7 @@ window.onmouseup = function run(event1) {
 
           document.onmousedown = function(event4) {
             hideSpawnedEcho(selectedString);
+            echoForm = false;
           };
         };
       };

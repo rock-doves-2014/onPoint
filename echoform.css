@@ -45,6 +45,10 @@ div.echo-submit{
   background: url('black_sound.png') center no-repeat #B6FCD5;
 }
 
+.echo-frame button:submit {
+  outline: 0;
+}
+
 .echo-frame input#userText {
   background-color: #ecf0f1;
   color: #333333;
@@ -80,10 +84,6 @@ div.echo-submit input#userText:focus {
   resize: none;
 }
 
-div.echo-submit input#userText:focus {
-  outline: 0;
-}
-
 #char-count {
   width: 30px;
   height: 30px;
@@ -93,5 +93,5 @@ div.echo-submit input#userText:focus {
   font-size: 12px;
   line-height: 0px;
   text-align: center;
-  margin-left: 15px;
+  margin-left: 16px;
 }
