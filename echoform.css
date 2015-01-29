@@ -45,9 +45,8 @@ div.echo-submit{
   background: url('black_sound.png') center no-repeat #B6FCD5;
 }
 
-.echo-frame button:submit {
+.echo-frame button:focus {
   outline: 0;
-  -webkit-tap-highlight-color:transparent;
 }
 
 .echo-frame input#userText {

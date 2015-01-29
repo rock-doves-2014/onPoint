@@ -2,9 +2,8 @@ window.onmouseup = function run(event1) {
   var echoFormExists = false;
 
   if (window.getSelection() != "") {
-    var keys = [];
-
     var selectedString = window.getSelection().toString();
+    var keys = [];
 
     onkeydown = onkeyup = function(event2) {
       keys[event2.keyCode] = event2.type == 'keydown';
