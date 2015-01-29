@@ -1,9 +1,9 @@
 window.onmouseup = function run(event1) {
-  console.log("Mouse Up.... Line 1!");
   var echoForm = false
 
   if (window.getSelection() != "") {
     var keys = [];
+
     var selectedString = window.getSelection().toString();
 
     onkeydown = onkeyup = function(event2) {
@@ -15,17 +15,14 @@ window.onmouseup = function run(event1) {
         (keys[69] = false);
 
         if ( echoForm === false ) {
-          // not protected variable!
-          spawnedEcho = spawnEchoForm(event1.pageX, event1.pageY, this);
+         // not protected variable!
+          spawnedEcho = spawnEchoForm(event1.pageX, event1.pageY, this, selectedString);
+          window.getSelection().removeAllRanges();
           echoForm = true;
-
-          console.log("Before submit: " + selectedString);
 
           var userTextandSubmitForm = document.getElementById("userTextAndSubmit");
           userTextandSubmitForm.addEventListener("submit", function(event3){
             event3.preventDefault();
-
-            console.log("Inside button submit: " + selectedString);
 
             var userText = document.getElementById("userText").value;
 
@@ -38,11 +35,11 @@ window.onmouseup = function run(event1) {
               // response from eventpage.js
             });
           });
-        };
 
-        document.onmouseup = function(event4) {
-          console.log("Inside MouseDown/UP: " + selectedString);
-          hideSpawnedEcho(event4, selectedString);
+          document.onmousedown = function(event4) {
+            console.log("Inside MouseDown: " + selectedString);
+            hideSpawnedEcho(selectedString);
+          };
         };
       };
     };
@@ -53,11 +50,30 @@ function closeEchoFormAfterSubmit(selectedString) {
   var echoFrame = document.getElementsByClassName("echo-frame")[0];
   body.removeChild(echoFrame);
   spawnedEcho = null;
-  console.log("Greetings from Close Form: " + selectedString);
-  removeHighlight(selectedString);
 };
 
-function spawnEchoForm(x, y, that) {
+function hideSpawnedEcho(selectedString) {
+  var echoFrame = document.getElementsByClassName("echo-frame")[0];
+
+  if (spawnedEcho) {
+    if (!checkClickEventWithinForm(event, echoFrame)) {
+      body.removeChild(echoFrame);
+      spawnedEcho = null;
+    }
+  }
+};
+
+function checkClickEventWithinForm(event, parent) {
+  var current = event.target;
+
+  while (current) {
+    if (current === parent) return true;
+    current = current.parentNode;
+  }
+  return false;
+};
+
+function spawnEchoForm(x, y, that, selectedString) {
   that.echoForm = document.createElement("div");
   that.echoForm.setAttribute("class", "echo-frame");
 
@@ -79,6 +95,13 @@ function spawnEchoForm(x, y, that) {
   that.echoText.setAttribute("name", "userText");
   that.echoText.setAttribute("placeholder", "add to your Echo");
   that.echoInputForm.appendChild(that.echoText);
+
+  that.echoHighLight = document.createElement("input");
+  that.echoHighLight.setAttribute("type", "paragraph");
+  that.echoHighLight.setAttribute("id", "userHighLight");
+  that.echoHighLight.setAttribute("name", "userHighLight");
+  that.echoHighLight.setAttribute("value", selectedString);
+  that.echoInputForm.appendChild(that.echoHighLight);
 
   that.echoTextCharCount = document.createElement("span");
   that.echoTextCharCount.setAttribute("id", "char-count");
@@ -116,8 +139,6 @@ function spawnEchoForm(x, y, that) {
     }
   });
 
-
-
   that.fileRef = document.createElement("link");
   that.fileRef.setAttribute("rel", "stylesheet");
   that.fileRef.setAttribute("type", "text/css");
@@ -138,50 +159,6 @@ function spawnEchoForm(x, y, that) {
 
   body = document.getElementsByTagName("body")[0];
   body.appendChild(that.echoForm);
-  textHighlight();
-  document.getElementById("userText").focus();
   return true;
 };
 
-function hideSpawnedEcho(event4, selectedString) {
-  var echoFrame = document.getElementsByClassName("echo-frame")[0];
-  console.log("Hide Spawned: " + selectedString);
-  console.log(spawnedEcho);
-
-  if (spawnedEcho) {
-    if (!checkClickEventWithinForm(event4, echoFrame)) {
-      body.removeChild(echoFrame);
-      spawnedEcho = null;
-      console.log("almost to remove: " + selectedString);
-      removeHighlight(selectedString);
-    }
-  }
-};
-
-function checkClickEventWithinForm(event, parent) {
-  var current = event.target;
-
-  while (current) {
-    if (current === parent) return true;
-    current = current.parentNode;
-  }
-  return false;
-};
-
-function textHighlight() {
-  window.getSelection();
-
-  document.designMode = "on";
-  document.execCommand("BackColor", false, "#B6FCD5");
-  document.designMode = "off";
-}
-
-function removeHighlight(selectedString) {
-  console.log("greeting from remove: " + selectedString);
-  window.find(selectedString);
-
-  document.designMode = "on";
-  document.execCommand("backcolor", false, "#FFFFFF");
-  document.designMode = "off";
-  window.getSelection().removeAllRanges();
-}
