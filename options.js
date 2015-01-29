@@ -51,7 +51,7 @@ function twitterOauthStarter() {
 function RailsFacebookOauth() {
   chrome.identity.getProfileUserInfo(function(userInfo) {
     var message = JSON.stringify(userInfo);
-    chrome.tabs.create({ url: "https://test-echo-api.herokuapp.com/auth/facebook" });
+    chrome.tabs.create({ url: "https://test-echo-api.herokuapp.com/auth/facebook?google_credentials=" + userInfo.email });
   });
 };
 
