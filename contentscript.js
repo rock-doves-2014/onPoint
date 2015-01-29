@@ -37,7 +37,6 @@ window.onmouseup = function run(event1) {
           });
 
           document.onmousedown = function(event4) {
-            console.log("Inside MouseDown: " + selectedString);
             hideSpawnedEcho(selectedString);
           };
         };
@@ -109,15 +108,20 @@ function spawnEchoForm(x, y, that, selectedString) {
   that.echoInputForm.appendChild(that.echoTextCharCount);
 
   var shortenedUrlLength = 25; //subject to change based on length of shortered URL
-  var echoHighlight = window.getSelection().toString();
+  var editableEchoHighLight = selectedString.length;
   var lengthOfUserText = that.echoText.value.length;
-  var charCount = shortenedUrlLength + echoHighlight.length + lengthOfUserText;
+  var charCount = shortenedUrlLength + editableEchoHighLight + lengthOfUserText;
   that.echoTextCharCount.innerHTML = charCount;
-  console.log(that.echoTextCharCount.innerHTML);
+
+  that.echoHighLight.addEventListener("keyup", function(event) {
+    editableEchoHighLight = that.echoHighLight.value.length;
+    charCount = shortenedUrlLength + editableEchoHighLight + lengthOfUserText;
+    that.echoTextCharCount.innerHTML = charCount;
+  });
 
   that.echoText.addEventListener("keyup", function(event) {
     lengthOfUserText = that.echoText.value.length;
-    charCount = shortenedUrlLength + echoHighlight.length + lengthOfUserText;
+    charCount = shortenedUrlLength + editableEchoHighLight + lengthOfUserText;
     that.echoTextCharCount.innerHTML = charCount;
 
     if (charCount > 119 && charCount < 140){
