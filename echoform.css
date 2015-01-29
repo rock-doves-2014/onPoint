@@ -18,7 +18,7 @@ div.echo-frame {
   position: absolute;
   width: 385px;
   height: 110px;
-  background-color: rgba(220,220,220, 1);
+  background-color: #50443C;
   border-radius: 7.5px;
   border: 2px solid black;
   z-index: 9999;
