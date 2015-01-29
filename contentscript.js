@@ -24,7 +24,7 @@ window.onmouseup = function run(event1) {
           userTextandSubmitForm.addEventListener("submit", function(event3){
             event3.preventDefault();
 
-            var finalUserHighLight = that.echoHighLight.value
+            var finalUserHighLight = document.getElementById.("userHighLight").value
             var userText = document.getElementById("userText").value;
 
             closeEchoFormAfterSubmit(selectedString);
@@ -35,6 +35,9 @@ window.onmouseup = function run(event1) {
             }, function(response) {
               // response from eventpage.js
             });
+
+            finalUserHighLight = "";
+            userText = "";
           });
 
           document.onmousedown = function(event4) {

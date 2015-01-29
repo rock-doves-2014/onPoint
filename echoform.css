@@ -47,6 +47,7 @@ div.echo-submit{
 
 .echo-frame button:submit {
   outline: 0;
+  -webkit-tap-highlight-color:transparent;
 }
 
 .echo-frame input#userText {
