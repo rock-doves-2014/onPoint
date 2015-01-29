@@ -133,13 +133,7 @@ function spawnEchoForm(x, y, that, selectedString) {
     charCount = shortenedUrlLength + editableEchoHighLight + lengthOfUserText;
     that.echoTextCharCount.innerHTML = charCount;
 
-    if (charCount < 141) {
-      document.getElementById("userText").style.borderColor="#B6FCD5";
-      document.getElementById("userHighLight").style.borderColor="#B6FCD5";
-    } else {
-      document.getElementById("userText").style.borderColor="#3B5998";
-      document.getElementById("userHighLight").style.borderColor="#3B5998";
-    }
+    updateCharColor();
   });
 
   that.echoText.addEventListener("keyup", function(event) {
@@ -147,6 +141,10 @@ function spawnEchoForm(x, y, that, selectedString) {
     charCount = shortenedUrlLength + editableEchoHighLight + lengthOfUserText;
     that.echoTextCharCount.innerHTML = charCount;
 
+    updateCharColor();
+  });
+
+  function updateCharColor() {
     if (charCount < 141) {
       document.getElementById("userText").style.borderColor="#B6FCD5";
       document.getElementById("userHighLight").style.borderColor="#B6FCD5";
@@ -154,7 +152,7 @@ function spawnEchoForm(x, y, that, selectedString) {
       document.getElementById("userText").style.borderColor="#3B5998";
       document.getElementById("userHighLight").style.borderColor="#3B5998";
     }
-  });
+  };
 
   that.fileRef = document.createElement("link");
   that.fileRef.setAttribute("rel", "stylesheet");
