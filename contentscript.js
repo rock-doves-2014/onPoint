@@ -22,7 +22,7 @@ window.onmouseup = function run(event1) {
             event3.preventDefault();
 
             var finalUserHighLight = document.getElementById("userHighLight").value
-            var userText = document.getElementById("userText").value;
+            var userText = document.getElementById("userEchoText").value;
 
             closeEchoFormAfterSubmit();
 
@@ -96,16 +96,9 @@ function spawnEchoForm(x, y, that, selectedString) {
   that.echoInputForm.setAttribute("id", "userTextAndSubmit");
   that.echoSubmit.appendChild(that.echoInputForm);
 
-  that.echoButton = document.createElement("button");
-  that.echoButton.setAttribute("type", "submit");
-  that.echoInputForm.appendChild(that.echoButton);
-
-  that.echoText = document.createElement("input");
-  that.echoText.setAttribute("type", "text");
-  that.echoText.setAttribute("id", "userText");
-  that.echoText.setAttribute("name", "userText");
-  that.echoText.setAttribute("placeholder", "add to your Echo");
-  that.echoInputForm.appendChild(that.echoText);
+  that.echoLeftWrapper = document.createElement("div");
+  that.echoLeftWrapper.setAttribute("class", "echoLeftWrapper");
+  that.echoInputForm.appendChild(that.echoLeftWrapper);
 
   that.echoHighLight = document.createElement("textarea");
   that.echoHighLight.setAttribute("id", "userHighLight");
@@ -113,12 +106,29 @@ function spawnEchoForm(x, y, that, selectedString) {
   that.echoHighLight.setAttribute("rows", "4");
   that.echoHighLight.setAttribute("cols", "20");
   that.echoHighLight.value = selectedString;
-  that.echoInputForm.appendChild(that.echoHighLight);
+  that.echoLeftWrapper.appendChild(that.echoHighLight);
+
+  that.echoText = document.createElement("input");
+  that.echoText.setAttribute("type", "text");
+  that.echoText.setAttribute("id", "userEchoText");
+  that.echoText.setAttribute("name", "userEchoText");
+  that.echoText.setAttribute("placeholder", "add to your Echo");
+  that.echoLeftWrapper.appendChild(that.echoText);
+
+  that.echoRightWrapper = document.createElement("div");
+  that.echoRightWrapper.setAttribute("class", "echoRightWrapper");
+  that.echoInputForm.appendChild(that.echoRightWrapper);
+
+  that.echoButton = document.createElement("button");
+  that.echoButton.setAttribute("type", "submit");
+  that.echoButton.setAttribute("id", "EchoButton");
+  that.echoRightWrapper.appendChild(that.echoButton);
 
   that.echoTextCharCount = document.createElement("span");
   that.echoTextCharCount.setAttribute("id", "char-count");
   that.echoTextCharCount.style.color= "#ffffff";
-  that.echoInputForm.appendChild(that.echoTextCharCount);
+  that.echoRightWrapper.appendChild(that.echoTextCharCount);
+
 
   var shortenedUrlLength = 25; //subject to change based on length of shortered URL
   var editableEchoHighLight = selectedString.length;
@@ -144,10 +154,10 @@ function spawnEchoForm(x, y, that, selectedString) {
 
   function updateCharColor() {
     if (charCount < 141) {
-      document.getElementById("userText").style.borderColor="#B6FCD5";
+      document.getElementById("userEchoText").style.borderColor="#B6FCD5";
       document.getElementById("userHighLight").style.borderColor="#B6FCD5";
     } else {
-      document.getElementById("userText").style.borderColor="#3B5998";
+      document.getElementById("userEchoText").style.borderColor="#3B5998";
       document.getElementById("userHighLight").style.borderColor="#3B5998";
     }
   };
@@ -173,6 +183,7 @@ function spawnEchoForm(x, y, that, selectedString) {
 
   body = document.getElementsByTagName("body")[0];
   body.appendChild(that.echoForm);
+  updateCharColor();
   return true;
 };
 
