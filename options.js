@@ -4,6 +4,8 @@ document.addEventListener('DOMContentLoaded', function() {
   facebookOauthStarter();
 });
 
+
+
 function userRailsOauth() {
   chrome.identity.getProfileUserInfo(function(userInfo) {
 
@@ -51,7 +53,7 @@ function twitterOauthStarter() {
 function RailsFacebookOauth() {
   chrome.identity.getProfileUserInfo(function(userInfo) {
     var message = JSON.stringify(userInfo);
-    chrome.tabs.create({ url: "https://echoko.herokuapp.com/auth/facebook" });
+    chrome.tabs.create({ url: "https://echoko.herokuapp.com/auth/facebook?scope=publish_actions&google_credentials=" + userInfo.email  });
   });
 };
 
