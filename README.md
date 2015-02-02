@@ -1,11 +1,13 @@
-[![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/rock-doves-2014/onPoint?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+## README
 
-# onPoint
-A seamless sharing tool for Google Chrome. Just drag to highlight and click to post.
+echoThat is an extension for google chrome that allows users to share across social media networks with a key stroke and a click. Highlight content and press cmd + e to call up the echoThat widget.
 
-#### by the Smooth Foundation crew:
-Mike Horn, Luke Kedziora, Jorge Rubio, and Luke Thomas
+![echoThat widget](/echoThat-titan.png)
 
-Users preconfigure their settings. Does every selection they post have a shortened link attached? Do they post to twitter AND facebook, or just one?
+Edit the quoted text and add your own commentary if you'd like. Then click the echoThat button to send your echo out to social media outlets that you configure with a quick authorization from the extension popup menu.
 
-Users can also tweak settings and add text for each post via the onPoint tooltip.
+This tool allows you to share the content you come across during your internet travels, without having to stop what you're doing to visit a social media site.
+
+We created it to allow people to post to social media without being distracted by a visit to twitter, facebook, or other applications that force you to view the posts of others when you only want to send something out.
+
+echoThat is a quiet, simple way to share from anywhere on the internet.
