@@ -100,9 +100,10 @@ input#userEchoText:focus {
 
 div.echoRightWrapper {
   position: absolute;
+  top: 0px;
+  right: 0px;
   float: right;
   clear: right;
-  right: 0px;
   width: 18%;
   height: 100%;
 }
