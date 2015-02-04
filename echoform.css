@@ -131,6 +131,8 @@ div.echoRightWrapper {
 }
 
 #char-count {
+  display: inline-block;
+  position: absolute;
   right: 18%;
   bottom: 0%;
   float: right;
@@ -138,9 +140,8 @@ div.echoRightWrapper {
   width: 30px;
   height: 30px;
   opacity: .8;
-  display: inline-block;
+  font-family: monospace;
   font-size: 12px;
   line-height: 0px;
   text-align: center;
-  position: absolute;
 }
