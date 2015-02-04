@@ -109,21 +109,21 @@ div.echoRightWrapper {
 }
 
 #EchoButton {
-  z-index: 10;
-  border-radius: 54px;
+  position: absolute;
   top: 3%;
   right: 7%;
-  padding: 30px 23px 10px 17px;
-  background: url('sage_sound.png') center no-repeat #333333;
-  border: 2px solid #333333;
-  position: absolute;
   float: right;
   clear: right;
+  border: 2px solid #333333;
+  border-radius: 54px;
+  background: url('sage_sound.png') center no-repeat #333333;
+  padding: 30px 23px 10px 17px;
+  z-index: 10;
 }
 
 #EchoButton:hover {
-  padding: 30px 23px 10px 17px;
   background: url('black_sound.png') center no-repeat #B6FCD5;
+  padding: 30px 23px 10px 17px;
 }
 
 #EchoButton:focus {
