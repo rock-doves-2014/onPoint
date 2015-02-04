@@ -12,13 +12,13 @@
 /*end reset, begin specific style*/
 
 div.echo-frame {
-  visibility: hidden;
   position: absolute;
-  width: 385px;
-  height: 110px;
+  width: 300px;
+  height: 90px;
   background-color: #50443C;
-  border-radius: 7.5px;
+  box-sizing: content-box;
   border: 2px solid black;
+  border-radius: 7.5px;
   z-index: 9999;
 }
 
