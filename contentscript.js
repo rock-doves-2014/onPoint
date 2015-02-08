@@ -1,7 +1,7 @@
 window.onmouseup = function run(event1) {
   var echoFormExists = false;
 
-  if (window.getSelection() != "") {
+  if (window.getSelection().type == "Range") {
     var selectedString = '"'+ window.getSelection().toString() + '"';
     var keys = [];
 
