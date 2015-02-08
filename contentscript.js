@@ -1,13 +1,13 @@
 window.onmouseup = function run(event1) {
   var echoFormExists = false;
 
-  if (window.getSelection().type == "Range") {
+  if (rangeIsSelected()) {
     var keys = [];
 
     onkeydown = onkeyup = function(event2) {
       keys[event2.keyCode] = event2.type == 'keydown';
 
-      if ( (keys[17] === true) && (keys[69] === true) ) {
+      if ( (keys[17] === true) && (keys[69] === true) && rangeIsSelected() ) {
         event2.preventDefault();
 
         if ( echoFormExists === false ) {
@@ -43,6 +43,10 @@ window.onmouseup = function run(event1) {
       };
     };
   };
+};
+
+function rangeIsSelected() {
+  return (window.getSelection().type == "Range");
 };
 
 function closeEchoFormAfterSubmit() {
