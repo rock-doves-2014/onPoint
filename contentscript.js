@@ -2,7 +2,7 @@ window.onmouseup = function run(event1) {
   var echoFormExists = false;
 
   if (window.getSelection() != "") {
-    var selectedString = window.getSelection().toString();
+    var selectedString = '"'+ window.getSelection().toString() + '"';
     var keys = [];
 
     onkeydown = onkeyup = function(event2) {
