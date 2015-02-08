@@ -2,7 +2,6 @@ window.onmouseup = function run(event1) {
   var echoFormExists = false;
 
   if (window.getSelection().type == "Range") {
-    var selectedString = '"'+ window.getSelection().toString() + '"';
     var keys = [];
 
     onkeydown = onkeyup = function(event2) {
@@ -12,7 +11,8 @@ window.onmouseup = function run(event1) {
         event2.preventDefault();
 
         if ( echoFormExists === false ) {
-         // not protected variable!
+          var selectedString = '"'+ window.getSelection().toString() + '"';
+          // not protected variable!
           spawnedEcho = spawnEchoForm(event1.pageX, event1.pageY, this, selectedString);
           window.getSelection().removeAllRanges();
           echoFormExists = true;
