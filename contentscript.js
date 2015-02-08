@@ -70,6 +70,7 @@ function hideSpawnedEcho() {
     if (!checkClickEventWithinForm(event, echoFrame)) {
       body.removeChild(echoFrame);
       echoFormExists = false;
+      spawnedEcho = false;
     }
   }
 };
