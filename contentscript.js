@@ -5,21 +5,19 @@ window.onmouseup = function(event1) {
   onkeydown = onkeyup = function(event2) {
     keys[event2.keyCode] = event2.type == 'keydown';
 
-    if ( (keys[17] === true) && (keys[69] === true) && rangeIsSelected() ) {
+    if ( (keys[17] === true) && (keys[69] === true)
+        && rangeIsSelected() && !echoFormExists ) {
       event2.preventDefault();
-
-      if ( echoFormExists === false ) {
-        var selectedString = '"'+ window.getSelection().toString() + '"';
-        // not protected variable!
-        spawnedEcho = spawnEchoForm(event1.pageX, event1.pageY, this, selectedString);
-        window.getSelection().removeAllRanges();
-        echoFormExists = true;
-        echoFormSubmit();
-
         document.onmousedown = function(event4) {
           hideSpawnedEcho();
         };
       };
+      var selectedString = '"'+ window.getSelection().toString() + '"';
+      // not protected variable!
+      spawnedEcho = spawnEchoForm(event1.pageX, event1.pageY, this, selectedString);
+      window.getSelection().removeAllRanges();
+      echoFormExists = true;
+      echoFormSubmit();
     };
   };
 };
