@@ -1,4 +1,4 @@
-window.onmouseup = function run(event1) {
+window.onmouseup = function(event1) {
   var echoFormExists = false;
 
     var keys = [];
