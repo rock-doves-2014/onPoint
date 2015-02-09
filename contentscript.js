@@ -8,16 +8,13 @@ window.onmouseup = function(event1) {
     if ( (keys[17] === true) && (keys[69] === true)
         && rangeIsSelected() && !echoFormExists ) {
       event2.preventDefault();
-        document.onmousedown = function(event4) {
-          hideSpawnedEcho();
-        };
-      };
       var selectedString = '"'+ window.getSelection().toString() + '"';
       // not protected variable!
       spawnedEcho = spawnEchoForm(event1.pageX, event1.pageY, this, selectedString);
       window.getSelection().removeAllRanges();
       echoFormExists = true;
       echoFormSubmit();
+      hideSpawnedEcho();
     };
   };
 };
@@ -66,13 +63,15 @@ function echoFormSubmit() {
 };
 
 function hideSpawnedEcho() {
-  var echoFrame = document.getElementsByClassName("echo-frame")[0];
+  document.onmousedown = function(event4) {
+    var echoFrame = document.getElementsByClassName("echo-frame")[0];
 
-  if (spawnedEcho && !checkClickEventWithinForm(event, echoFrame)) {
-    body.removeChild(echoFrame);
-    echoFormExists = false;
-    spawnedEcho = false;
-  }
+    if (spawnedEcho && !checkClickEventWithinForm(event, echoFrame)) {
+      body.removeChild(echoFrame);
+      echoFormExists = false;
+      spawnedEcho = false;
+    };
+  };
 };
 
 function checkClickEventWithinForm(event, parent) {
