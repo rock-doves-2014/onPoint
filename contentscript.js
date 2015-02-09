@@ -162,12 +162,13 @@ function spawnEchoForm(x, y, that, selectedString) {
 };
 
 function updateCharColor(charCount) {
-  if (charCount < 141) {
-    document.getElementById("userEchoText").style.borderColor="#B6FCD5";
-    document.getElementById("userHighLight").style.borderColor="#B6FCD5";
-  } else {
-    document.getElementById("userEchoText").style.borderColor="#3B5998";
-    document.getElementById("userHighLight").style.borderColor="#3B5998";
+  var inputFields = ["userEchoText", "userHighLight"];
+  for (i in inputFields) {
+    if (charCount < 141) {
+      document.getElementById(inputFields[i]).style.borderColor="#B6FCD5";
+    } else {
+      document.getElementById(inputFields[i]).style.borderColor="#3B5998";
+    }
   }
 };
 
