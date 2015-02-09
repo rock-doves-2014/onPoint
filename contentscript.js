@@ -129,29 +129,6 @@ function spawnEchoForm(x, y, that, selectedString) {
   that.echoTextCharCount.style.color= "#ffffff";
   that.echoRightWrapper.appendChild(that.echoTextCharCount);
 
-
-  var shortenedUrlLength = 25; //subject to change based on length of shortered URL
-  var editableEchoHighLight = selectedString.length;
-  var lengthOfUserText = that.echoText.value.length;
-  var charCount = shortenedUrlLength + editableEchoHighLight + lengthOfUserText;
-  that.echoTextCharCount.innerHTML = charCount;
-
-  that.echoHighLight.addEventListener("keyup", function(event) {
-    editableEchoHighLight = that.echoHighLight.value.length;
-    charCount = shortenedUrlLength + editableEchoHighLight + lengthOfUserText;
-    that.echoTextCharCount.innerHTML = charCount;
-
-    updateCharColor(charCount);
-  });
-
-  that.echoText.addEventListener("keyup", function(event) {
-    lengthOfUserText = that.echoText.value.length;
-    charCount = shortenedUrlLength + editableEchoHighLight + lengthOfUserText;
-    that.echoTextCharCount.innerHTML = charCount;
-
-    updateCharColor(charCount);
-  });
-
   that.fileRef = document.createElement("link");
   that.fileRef.setAttribute("rel", "stylesheet");
   that.fileRef.setAttribute("type", "text/css");
@@ -171,9 +148,16 @@ function spawnEchoForm(x, y, that, selectedString) {
   y += 20;
   that.echoForm.style.top = y + "px";
 
+  var shortenedUrlLength = 25; //subject to change based on length of shortered URL
+  var editableEchoHighLight = selectedString.length;
+  var lengthOfUserText = that.echoText.value.length;
+  var charCount = shortenedUrlLength + editableEchoHighLight + lengthOfUserText;
+  that.echoTextCharCount.innerHTML = charCount;
+
   body = document.getElementsByTagName("body")[0];
   body.appendChild(that.echoForm);
   updateCharColor(charCount);
+  updateUserFeedback(that, shortenedUrlLength);
   return true;
 };
 
@@ -185,4 +169,15 @@ function updateCharColor(charCount) {
     document.getElementById("userEchoText").style.borderColor="#3B5998";
     document.getElementById("userHighLight").style.borderColor="#3B5998";
   }
+};
+
+function updateUserFeedback(that, shortenedUrlLength) {
+  that.echoLeftWrapper.addEventListener("keydown", function(event) {
+    editableEchoHighLight = that.echoHighLight.value.length;
+    lengthOfUserText = that.echoText.value.length;
+    charCount = shortenedUrlLength + editableEchoHighLight + lengthOfUserText;
+    that.echoTextCharCount.innerHTML = charCount;
+
+    updateCharColor(charCount);
+  });
 };
