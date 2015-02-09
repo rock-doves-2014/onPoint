@@ -14,25 +14,7 @@ window.onmouseup = function(event1) {
         spawnedEcho = spawnEchoForm(event1.pageX, event1.pageY, this, selectedString);
         window.getSelection().removeAllRanges();
         echoFormExists = true;
-
-        var userTextandSubmitForm = document.getElementById("userTextAndSubmit");
-        userTextandSubmitForm.addEventListener("submit", function(event3){
-          event3.preventDefault();
-
-          var finalUserHighLight = document.getElementById("userHighLight").value
-          var userText = document.getElementById("userEchoText").value;
-
-          closeEchoFormAfterSubmit();
-
-          chrome.runtime.sendMessage({
-            message: finalUserHighLight + " " + userText
-          }, function(response) {
-            // response from eventpage.js
-          });
-
-          finalUserHighLight = "";
-          userText = "";
-        });
+        echoFormSubmit();
 
         document.onmousedown = function(event4) {
           hideSpawnedEcho();
@@ -62,7 +44,28 @@ function echoThat() {
   setTimeout(function(){
     confirm.innerHTML = "that!";
   }, 750);
-}
+};
+
+function echoFormSubmit() {
+  var userTextandSubmitForm = document.getElementById("userTextAndSubmit");
+  userTextandSubmitForm.addEventListener("submit", function(event3){
+    event3.preventDefault();
+
+    var finalUserHighLight = document.getElementById("userHighLight").value
+    var userText = document.getElementById("userEchoText").value;
+
+    closeEchoFormAfterSubmit();
+
+    chrome.runtime.sendMessage({
+      message: finalUserHighLight + " " + userText
+    }, function(response) {
+      // response from eventpage.js
+    });
+
+    finalUserHighLight = "";
+    userText = "";
+  });
+};
 
 function hideSpawnedEcho() {
   var echoFrame = document.getElementsByClassName("echo-frame")[0];
