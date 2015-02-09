@@ -174,6 +174,8 @@ function spawnEchoForm(x, y, that, selectedString) {
 
   if ( x > (document.body.clientWidth - 390) ) {
     x = document.body.clientWidth - 400;
+  } else if ( x < 30 ) {
+    x = 20;
   } else {
     x = x - 25;
   };
