@@ -1,7 +1,6 @@
 window.onmouseup = function run(event1) {
   var echoFormExists = false;
 
-  if (rangeIsSelected()) {
     var keys = [];
 
     onkeydown = onkeyup = function(event2) {
