@@ -1,43 +1,41 @@
 window.onmouseup = function(event1) {
   var echoFormExists = false;
+  var keys = [];
 
-    var keys = [];
+  onkeydown = onkeyup = function(event2) {
+    keys[event2.keyCode] = event2.type == 'keydown';
 
-    onkeydown = onkeyup = function(event2) {
-      keys[event2.keyCode] = event2.type == 'keydown';
+    if ( (keys[17] === true) && (keys[69] === true) && rangeIsSelected() ) {
+      event2.preventDefault();
 
-      if ( (keys[17] === true) && (keys[69] === true) && rangeIsSelected() ) {
-        event2.preventDefault();
+      if ( echoFormExists === false ) {
+        var selectedString = '"'+ window.getSelection().toString() + '"';
+        // not protected variable!
+        spawnedEcho = spawnEchoForm(event1.pageX, event1.pageY, this, selectedString);
+        window.getSelection().removeAllRanges();
+        echoFormExists = true;
 
-        if ( echoFormExists === false ) {
-          var selectedString = '"'+ window.getSelection().toString() + '"';
-          // not protected variable!
-          spawnedEcho = spawnEchoForm(event1.pageX, event1.pageY, this, selectedString);
-          window.getSelection().removeAllRanges();
-          echoFormExists = true;
+        var userTextandSubmitForm = document.getElementById("userTextAndSubmit");
+        userTextandSubmitForm.addEventListener("submit", function(event3){
+          event3.preventDefault();
 
-          var userTextandSubmitForm = document.getElementById("userTextAndSubmit");
-          userTextandSubmitForm.addEventListener("submit", function(event3){
-            event3.preventDefault();
+          var finalUserHighLight = document.getElementById("userHighLight").value
+          var userText = document.getElementById("userEchoText").value;
 
-            var finalUserHighLight = document.getElementById("userHighLight").value
-            var userText = document.getElementById("userEchoText").value;
+          closeEchoFormAfterSubmit();
 
-            closeEchoFormAfterSubmit();
-
-            chrome.runtime.sendMessage({
-              message: finalUserHighLight + " " + userText
-            }, function(response) {
-              // response from eventpage.js
-            });
-
-            finalUserHighLight = "";
-            userText = "";
+          chrome.runtime.sendMessage({
+            message: finalUserHighLight + " " + userText
+          }, function(response) {
+            // response from eventpage.js
           });
 
-          document.onmousedown = function(event4) {
-            hideSpawnedEcho();
-          };
+          finalUserHighLight = "";
+          userText = "";
+        });
+
+        document.onmousedown = function(event4) {
+          hideSpawnedEcho();
         };
       };
     };
