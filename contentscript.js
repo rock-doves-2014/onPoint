@@ -67,12 +67,10 @@ function echoThat() {
 function hideSpawnedEcho() {
   var echoFrame = document.getElementsByClassName("echo-frame")[0];
 
-  if (spawnedEcho) {
-    if (!checkClickEventWithinForm(event, echoFrame)) {
-      body.removeChild(echoFrame);
-      echoFormExists = false;
-      spawnedEcho = false;
-    }
+  if (spawnedEcho && !checkClickEventWithinForm(event, echoFrame)) {
+    body.removeChild(echoFrame);
+    echoFormExists = false;
+    spawnedEcho = false;
   }
 };
 
