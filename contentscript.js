@@ -174,11 +174,10 @@ function spawnEchoForm(x, y, that, selectedString) {
 
   if ( x > (document.body.clientWidth - 390) ) {
     x = document.body.clientWidth - 400;
-    that.echoForm.style.left = x + "px";
   } else {
     x = x - 25;
-    that.echoForm.style.left = x + "px";
   };
+  that.echoForm.style.left = x + "px";
 
   y = y + 20;
   that.echoForm.style.top = y + "px";
