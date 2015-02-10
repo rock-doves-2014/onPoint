@@ -34,11 +34,11 @@ function closeEchoFormAfterSubmit() {
 
 function echoThat() {
   var confirm = document.getElementById("char-count");
-  confirm.innerHTML = "Echo...";
+  confirm.innerHTML = "echo";
 
   setTimeout(function(){
-    confirm.innerHTML = "that!";
-  }, 750);
+    confirm.innerHTML = "That.";
+  }, 720);
 };
 
 function echoFormSubmit() {
