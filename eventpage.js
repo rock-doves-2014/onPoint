@@ -7,7 +7,7 @@ chrome.runtime.onMessage.addListener(
       chrome.storage.sync.get('chrome_token', function(items) {
         echo['chrome_token'] = items.chrome_token
       });
-      echo['url'] = sender.url
+      echo['url'] = encodeURIComponent(sender.url);
       var timer = setInterval(function() {
         if (echo['google_credentials'] != null && echo['chrome_token'] != null && echo['url'] != null) {
           resolve(echo);
