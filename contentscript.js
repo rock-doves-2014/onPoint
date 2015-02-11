@@ -1,48 +1,26 @@
-window.onmouseup = function run(event1) {
+window.onmouseup = function(event1) {
   var echoFormExists = false;
+  var keys = [];
 
-  if (window.getSelection() != "") {
-    var selectedString = window.getSelection().toString();
-    var keys = [];
+  onkeydown = onkeyup = function(event2) {
+    keys[event2.keyCode] = event2.type == 'keydown';
 
-    onkeydown = onkeyup = function(event2) {
-      keys[event2.keyCode] = event2.type == 'keydown';
-
-      if ( (keys[17] === true) && (keys[69] === true) ) {
-        event2.preventDefault();
-
-        if ( echoFormExists === false ) {
-         // not protected variable!
-          spawnedEcho = spawnEchoForm(event1.pageX, event1.pageY, this, selectedString);
-          window.getSelection().removeAllRanges();
-          echoFormExists = true;
-
-          var userTextandSubmitForm = document.getElementById("userTextAndSubmit");
-          userTextandSubmitForm.addEventListener("submit", function(event3){
-            event3.preventDefault();
-
-            var finalUserHighLight = document.getElementById("userHighLight").value
-            var userText = document.getElementById("userEchoText").value;
-
-            closeEchoFormAfterSubmit();
-
-            chrome.runtime.sendMessage({
-              message: finalUserHighLight + " " + userText
-            }, function(response) {
-              // response from eventpage.js
-            });
-
-            finalUserHighLight = "";
-            userText = "";
-          });
-
-          document.onmousedown = function(event4) {
-            hideSpawnedEcho();
-          };
-        };
-      };
+    if ( (keys[17] === true) && (keys[69] === true)
+        && rangeIsSelected() && !echoFormExists ) {
+      event2.preventDefault();
+      var selectedString = '"'+ window.getSelection().toString() + '"';
+      // not protected variable!
+      spawnedEcho = spawnEchoForm(event1.pageX, event1.pageY, this, selectedString);
+      window.getSelection().removeAllRanges();
+      echoFormExists = true;
+      echoFormSubmit();
+      hideSpawnedEcho();
     };
   };
+};
+
+function rangeIsSelected() {
+  return (window.getSelection().type == "Range");
 };
 
 function closeEchoFormAfterSubmit() {
@@ -56,22 +34,44 @@ function closeEchoFormAfterSubmit() {
 
 function echoThat() {
   var confirm = document.getElementById("char-count");
-  confirm.innerHTML = "Echo...";
+  confirm.innerHTML = "echo";
 
   setTimeout(function(){
-    confirm.innerHTML = "that!";
-  }, 750);
-}
+    confirm.innerHTML = "That.";
+  }, 720);
+};
+
+function echoFormSubmit() {
+  var userTextandSubmitForm = document.getElementById("userTextAndSubmit");
+  userTextandSubmitForm.addEventListener("submit", function(event3){
+    event3.preventDefault();
+
+    var finalUserHighLight = document.getElementById("userHighLight").value
+    var userText = document.getElementById("userEchoText").value;
+
+    closeEchoFormAfterSubmit();
+
+    chrome.runtime.sendMessage({
+      message: finalUserHighLight + " " + userText
+    }, function(response) {
+      // response from eventpage.js
+    });
+
+    finalUserHighLight = "";
+    userText = "";
+  });
+};
 
 function hideSpawnedEcho() {
-  var echoFrame = document.getElementsByClassName("echo-frame")[0];
+  document.onmousedown = function(event4) {
+    var echoFrame = document.getElementsByClassName("echo-frame")[0];
 
-  if (spawnedEcho) {
-    if (!checkClickEventWithinForm(event, echoFrame)) {
+    if (spawnedEcho && !checkClickEventWithinForm(event, echoFrame)) {
       body.removeChild(echoFrame);
       echoFormExists = false;
-    }
-  }
+      spawnedEcho = false;
+    };
+  };
 };
 
 function checkClickEventWithinForm(event, parent) {
@@ -129,39 +129,6 @@ function spawnEchoForm(x, y, that, selectedString) {
   that.echoTextCharCount.style.color= "#ffffff";
   that.echoRightWrapper.appendChild(that.echoTextCharCount);
 
-
-  var shortenedUrlLength = 25; //subject to change based on length of shortered URL
-  var editableEchoHighLight = selectedString.length;
-  var lengthOfUserText = that.echoText.value.length;
-  var charCount = shortenedUrlLength + editableEchoHighLight + lengthOfUserText;
-  that.echoTextCharCount.innerHTML = charCount;
-
-  that.echoHighLight.addEventListener("keyup", function(event) {
-    editableEchoHighLight = that.echoHighLight.value.length;
-    charCount = shortenedUrlLength + editableEchoHighLight + lengthOfUserText;
-    that.echoTextCharCount.innerHTML = charCount;
-
-    updateCharColor();
-  });
-
-  that.echoText.addEventListener("keyup", function(event) {
-    lengthOfUserText = that.echoText.value.length;
-    charCount = shortenedUrlLength + editableEchoHighLight + lengthOfUserText;
-    that.echoTextCharCount.innerHTML = charCount;
-
-    updateCharColor();
-  });
-
-  function updateCharColor() {
-    if (charCount < 141) {
-      document.getElementById("userEchoText").style.borderColor="#B6FCD5";
-      document.getElementById("userHighLight").style.borderColor="#B6FCD5";
-    } else {
-      document.getElementById("userEchoText").style.borderColor="#3B5998";
-      document.getElementById("userHighLight").style.borderColor="#3B5998";
-    }
-  };
-
   that.fileRef = document.createElement("link");
   that.fileRef.setAttribute("rel", "stylesheet");
   that.fileRef.setAttribute("type", "text/css");
@@ -169,21 +136,49 @@ function spawnEchoForm(x, y, that, selectedString) {
   document.getElementsByTagName("head")[0].appendChild(that.fileRef);
 
   that.echoForm.style.visibility = "visible";
-
   if ( x > (document.body.clientWidth - 390) ) {
     x = document.body.clientWidth - 400;
-    that.echoForm.style.left = x + "px";
+  } else if ( x < 30 ) {
+    x = 20;
   } else {
-    x = x - 25;
-    that.echoForm.style.left = x + "px";
+    x -= 25;
   };
+  that.echoForm.style.left = x + "px";
 
-  y = y + 20;
+  y += 20;
   that.echoForm.style.top = y + "px";
+
+  var shortenedUrlLength = 25; //subject to change based on length of shortered URL
+  var editableEchoHighLight = selectedString.length;
+  var lengthOfUserText = that.echoText.value.length;
+  var charCount = shortenedUrlLength + editableEchoHighLight + lengthOfUserText;
+  that.echoTextCharCount.innerHTML = charCount;
 
   body = document.getElementsByTagName("body")[0];
   body.appendChild(that.echoForm);
-  updateCharColor();
+  updateCharColor(charCount);
+  updateUserFeedback(that, shortenedUrlLength);
   return true;
 };
 
+function updateCharColor(charCount) {
+  var inputFields = ["userEchoText", "userHighLight"];
+  for (i in inputFields) {
+    if (charCount < 141) {
+      document.getElementById(inputFields[i]).style.borderColor="#B6FCD5";
+    } else {
+      document.getElementById(inputFields[i]).style.borderColor="#3B5998";
+    }
+  }
+};
+
+function updateUserFeedback(that, shortenedUrlLength) {
+  that.echoLeftWrapper.addEventListener("keydown", function(event) {
+    editableEchoHighLight = that.echoHighLight.value.length;
+    lengthOfUserText = that.echoText.value.length;
+    charCount = shortenedUrlLength + editableEchoHighLight + lengthOfUserText;
+    that.echoTextCharCount.innerHTML = charCount;
+
+    updateCharColor(charCount);
+  });
+};
